@@ -1,0 +1,16 @@
+
+.editor-container{
+  position: absolute;
+  width: 100px;
+  margin-left: 300px;
+}
+
+.editor-container h1{
+  margin-left: 10px;
+}
+
+.editor-text{
+  width: 100vw;
+  height: 100vw;
+
+}

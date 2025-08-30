@@ -1,0 +1,120 @@
+/* ==============================
+   Emerald Note-Taking App Styles
+   ============================== */
+
+/* ==============================
+   Farbvariablen
+   ============================== */
+:root {
+  /* Primärfarben */
+  --emerald: #2ECC71;
+  --emerald-dark: #27AE60;
+  --emerald-light: #A3E4D7;
+
+  /* Akzent / Warnungen */
+  --warning: #F1C40F;
+
+  /* Hintergrundfarben Dark Mode */
+  --bg-dark: #121212;
+  --panel-dark: #1E1E1E;
+
+  /* Hintergrundfarben Light Mode */
+  --bg-light: #FAFAFA;
+  --panel-light: #FFFFFF;
+
+  /* Textfarben Dark Mode */
+  --text-primary-dark: #E0E0E0;
+  --text-secondary-dark: #B0B0B0;
+
+  /* Textfarben Light Mode */
+  --text-primary-light: #333333;
+  --text-secondary-light: #666666;
+
+  /* Borders / Divider */
+  --border-dark: #2C2C2C;
+  --border-light: #E0E0E0;
+}
+
+/* ==============================
+   Dark Mode (Standard)
+   ============================== */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--emerald-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--emerald);
+}
+
+button {
+  background-color: var(--back);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--emerald-dark);
+}
+
+/* Panels / Sidebar */
+.panel {
+  background-color: var(--panel-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+/* Warnings / Alerts */
+.alert {
+  background-color: var(--warning);
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Sekundärer Text / Labels */
+.secondary-text {
+  color: var(--text-secondary-dark);
+}
+
+/* ==============================
+   Light Mode
+   ============================== */
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-primary-light);
+}
+
+body.light-mode .panel {
+  background-color: var(--panel-light);
+  border: 1px solid var(--border-light);
+}
+
+body.light-mode a {
+  color: var(--emerald-dark);
+}
+
+body.light-mode a:hover {
+  color: var(--emerald);
+}
+
+body.light-mode .secondary-text {
+  color: var(--text-secondary-light);
+}
+
