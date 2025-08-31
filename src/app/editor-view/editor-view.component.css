@@ -9,8 +9,36 @@
   margin-left: 10px;
 }
 
+
 .editor-text{
-  width: 100vw;
-  height: 100vw;
+  width: 80vw;
+  height: 98vw;
+  margin-left: 10px;
 
 }
+
+textarea{
+  cursor: pointer;
+  resize: none;
+
+}
+
+textarea::-webkit-scrollbar {
+  width: 5px;              /* Breite der Scrollbar */
+  height: 10px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: var(--panel-dark);       /* Hintergrund der Spur */
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #888;          /* Farbe des Scrollbalkens */
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #555;          /* Hover-Effekt */
+}
+

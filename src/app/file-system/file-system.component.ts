@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 
-// TODO: pfad erweitern durch directory und datein in der dir anzeigen
+// TODO: pfad selbst wählen
+// TODO: button mit dem man ordner hinzufügen kann oder datein
 
 @Component({
   selector: 'app-file-system',
@@ -20,6 +21,7 @@ export class FileSystemComponent {
   rawFiles: NoteFile[] = [];
   noteContent: any;
   tree: any;
+  pathValue: string = "";
   @Input() node: any;
 
   constructor(private noteService: NoteService,private fileService: FileService) {
@@ -28,6 +30,7 @@ export class FileSystemComponent {
 
 
   }
+
 
 
   async buildTree(path: string): Promise<Object>{

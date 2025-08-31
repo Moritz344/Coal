@@ -40,6 +40,11 @@ export class EditorViewComponent implements OnInit {
 
   }
 
+  async saveCurrentFile() {
+    await this.fileService.saveFile(this.note[0].path,this.noteContent);
+    console.log("saved file");
+  }
+
 
   async readingFile() {
     this.noteContent = await this.fileService.readFile(this.note[0].path);

@@ -62,8 +62,23 @@ ipcMain.handle('fs:readFile', async (event, filePath) => {
 });
 
 // save file
-ipcMain.handle('fs:saveFile', async (event, filePath, content) => {
-  await fs.promises.writeFile(filePath, content, 'utf-8');
-  return true;
+ipcMain.handle('fs:saveFile', async (event, filePath , content) => {
+  try {
+    await fs.promises.writeFile(filePath,content,'utf-8');
+    return { success: true };
+  } catch(err) {
+    console.error("Error beim speichern",err);
+    return { success: false,erorr: err }
+  }
+});
+// rename file
+ipcMain.handle('fs:renameFile', async (event, oldPath, newPath) => {
+  try {
+    await fs.promises.rename(oldPath, newPath);
+    return { success: true };
+  } catch (err) {
+    console.error('Fehler beim Umbenennen:', err);
+    return { success: false, error: err };
+  }
 });
 

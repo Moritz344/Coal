@@ -1,15 +1,36 @@
     <div class="tree-node">
       <ng-container *ngIf="node.isDirectory; else fileTemplate">
-        <details>
+
+        <details >
           <summary>{{ node.name }}</summary>
+
           @for(child of node.children; track $index) {
           <app-tree-node [node]="child"></app-tree-node>
           }
         </details>
       </ng-container>
-      <ng-template #fileTemplate>
-        <a class="file" [routerLink]="['/note', node.name]" (click)="saveCurrentSelectedNote(node.name,node.path)">
-          {{ node.name }}
-        </a>
-      </ng-template>
+      <div class="file-names">
+        <ng-template #fileTemplate>
+
+          @if (isEditing) {
+            <input
+            type="text"
+            class="file"
+            [(ngModel)]="node.name"
+            (change)="onNameChange(node.name,node.path)"
+            (blur)="stopEditing()"
+            (keydown.enter)="stopEditing()"
+            (click)="saveCurrentSelectedNote(node.name, node.path); router.navigate(['/note', node.name])"
+
+            />
+
+          }@else{
+            <a class="file" (dblclick)="startEditing()" [routerLink]="['/note', node.name]" (click)="saveCurrentSelectedNote(node.name,node.path)">
+            {{ node.name }}
+          </a>
+          }
+        </ng-template>
+
+
+      </div>
     </div>

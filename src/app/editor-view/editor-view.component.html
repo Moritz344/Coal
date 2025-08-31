@@ -2,10 +2,14 @@
 <div class="editor-container" >
   <h1>{{ noteName }}</h1>
 
-  <textarea
-    [(ngModel)]="noteContent"
-    class="editor-text">
-  </textarea>
+  <div class="textbox">
+    <textarea
+      (change)="saveCurrentFile()"
+      [(ngModel)]="noteContent"
+      class="editor-text">
+    </textarea>
+
+  </div>
 
 
 </div>

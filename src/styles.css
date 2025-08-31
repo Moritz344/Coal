@@ -46,15 +46,50 @@ body {
   padding: 0;
 }
 
+textarea{
+
+  background-color: var(--bg-dark);
+  color: white;
+  border: none;
+  outline: none;
+
+}
+
+input {
+
+  outline: none;
+  background-color: var(--bg-dark);
+  color: white;
+  border: none;
+  font-size: 16px;
+
+}
+
+input:hover {
+
+  background-color: var(--panel-dark);
+
+}
+
+details{
+  color: var(--text-secondary-light);
+  cursor: pointer;
+  user-select: none;
+}
+details:hover{
+  color: white;
+}
+
 a {
-  color: var(--emerald-light);
+  color: var(--text-secondary-light);
   text-decoration: none;
-  transition: color 0.2s;
+  border-radius: 10px;
 }
 
 a:hover {
-  color: var(--emerald);
+  color: var(--emerald-dark);
 }
+
 
 button {
   background-color: var(--back);
