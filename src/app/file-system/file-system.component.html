@@ -1,8 +1,8 @@
 
 <div class="file-container">
 
-  <button>Add File</button>
-  <button>Add Directory</button>
+  <button (click)="createNote('Untitled.md')">Add File</button>
+  <button (click)="createFolder('Untitled/')">Add Directory</button>
   <app-tree-node *ngFor="let node of tree" [node]="node"></app-tree-node>
 
 </div>

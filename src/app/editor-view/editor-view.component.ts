@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,ViewChild,ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
@@ -18,9 +18,11 @@ export class EditorViewComponent implements OnInit {
   noteContent: string = "";
   renderedMarkdown: string = "";
 
+
   constructor(private noteService: NoteService,
               private fileService: FileService,
              private route: ActivatedRoute) {}
+
 
   ngOnInit():void {
       this.route.paramMap.subscribe(params => {
@@ -38,11 +40,13 @@ export class EditorViewComponent implements OnInit {
     });
 
 
+
   }
 
   async saveCurrentFile() {
-    await this.fileService.saveFile(this.note[0].path,this.noteContent);
-    console.log("saved file");
+    let result = await this.fileService.saveFile(this.note[0].path,this.noteContent);
+    console.log("saved file",result);
+    console.log(this.noteContent);
   }
 
 

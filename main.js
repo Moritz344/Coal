@@ -64,8 +64,8 @@ ipcMain.handle('fs:readFile', async (event, filePath) => {
 // save file
 ipcMain.handle('fs:saveFile', async (event, filePath , content) => {
   try {
-    await fs.promises.writeFile(filePath,content,'utf-8');
-    return { success: true };
+      await fs.promises.writeFile(filePath,content,'utf-8');
+      return true ;
   } catch(err) {
     console.error("Error beim speichern",err);
     return { success: false,erorr: err }
@@ -82,3 +82,13 @@ ipcMain.handle('fs:renameFile', async (event, oldPath, newPath) => {
   }
 });
 
+// create folder
+ipcMain.handle('fs:createFolder', async (event, filePath ) => {
+  try {
+      await fs.promises.mkdir(filePath,{ recursive: true });
+      return true ;
+  } catch(err) {
+    console.error("Error beim erstellen des Ordners",err);
+    return { success: false,erorr: err }
+  }
+});

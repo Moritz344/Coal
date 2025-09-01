@@ -8,6 +8,7 @@ import { NoteFile } from '../models/note-file.model';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
+// TODO: Nerdtree,vim status line
 
 @Component({
   selector: 'app-file-system',
@@ -54,7 +55,7 @@ export class FileSystemComponent {
       }
     }
 
-    console.log("tree",tree);
+    //console.log("tree",tree);
     return tree;
 }
 
@@ -62,19 +63,54 @@ export class FileSystemComponent {
   async loadTree(path: string) {
     this.rawFiles = await this.fileService.readDir(path);
     if (this.rawFiles.length >= 1) {
-      console.log(this.rawFiles);
+      //console.log(this.rawFiles);
       this.tree = await this.buildTree(path);
       console.log(this.tree);
     }
 
   }
 
-  async openNote() {
-    const content = await this.fileService.openFile();
-    if (content) {
-      this.noteContent = content;
-    }
+  checkIfFileExists(name: string): boolean {
+     var exists = false;
+      for (const item of this.tree) {
+        if (item.name === name) {
+          exists = true;
+        }
+      }
 
+      return exists;
+  }
+
+  async createFolder(name:string) {
+    let result = await this.fileService.createFolder(this.path + "/" + name);
+    console.log(result);
+
+    let exists = this.checkIfFileExists(name);
+    if (!exists) {
+          this.tree.push({
+            name: name,
+            path: this.path + "/" + name,
+            isDirectory: true
+          });
+          console.log(this.path);
+
+    }
+  }
+
+  async createNote(name: string) {
+    let result = await this.fileService.saveFile(this.path + "/" + name,"");
+    console.log(result);
+    let exists = this.checkIfFileExists(name);
+      if (!exists) {
+          this.tree.push({
+            name: name,
+            path: this.path + "/" + name,
+            isDirectory: false
+          });
+
+      }
+
+      console.log(this.tree);
   }
 
 

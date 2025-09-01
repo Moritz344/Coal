@@ -25,6 +25,10 @@ export class FileService {
     return await (window as any).electronAPI.renameFile(oldPath, newPath);
   }
 
+  async createFolder(path: string) {
+    return await (window as any).electronAPI.createFolder(path);
+  }
+
   async readDir(path: string) {
     return await (window as any).electronAPI.readDir(path);
   }
