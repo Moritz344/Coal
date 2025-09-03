@@ -94,6 +94,8 @@ export class FileSystemComponent {
           });
           console.log(this.path);
 
+    }else {
+      alert("Directory with this name already exists");
     }
   }
 
@@ -102,14 +104,17 @@ export class FileSystemComponent {
     console.log(result);
     let exists = this.checkIfFileExists(name);
       if (!exists) {
+        console.log("fiel does not exist");
           this.tree.push({
             name: name,
             path: this.path + "/" + name,
             isDirectory: false
           });
-
+      }else {
+        alert("File with that name already exists");
       }
 
+      console.log(name,this.path + "/" + name);
       console.log(this.tree);
   }
 

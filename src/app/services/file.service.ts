@@ -17,7 +17,6 @@ export class FileService {
     return content as string;
 
   }
-
   async saveFile(filePath: string, content: string): Promise<boolean> {
     return await (window as any).electronAPI.saveFile(filePath, content);
   }
