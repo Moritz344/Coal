@@ -72,7 +72,7 @@ ipcMain.handle('fs:saveFile', async (event, filePath , content) => {
   }
 });
 // rename file
-ipcMain.handle('fs:renameFile', async (event, oldPath, newPath) => {
+ipcMain.handle('fs:rename', async (event, oldPath, newPath) => {
   try {
     await fs.promises.rename(oldPath, newPath);
     return { success: true };
@@ -81,6 +81,7 @@ ipcMain.handle('fs:renameFile', async (event, oldPath, newPath) => {
     return { success: false, error: err };
   }
 });
+
 
 // create folder
 ipcMain.handle('fs:createFolder', async (event, filePath ) => {

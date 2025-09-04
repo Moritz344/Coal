@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,HostListener,signal } from '@angular/core';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { TreeNodeComponent} from '../tree-node/tree-node.component';
@@ -24,8 +24,23 @@ export class FileSystemComponent {
   tree: any;
   pathValue: string = "";
   @Input() node: any;
+  toggleTree = signal(true);
+
+  @HostListener('window:keydown', ['$event'])
+
+  toggleFileTree(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === "n") {
+      this.toggleTree.update((v) => !v);
+
+    }
+  }
+
+  toggleFileTreeButton() {
+    this.toggleTree.update((v) => !v);
+  }
 
   constructor(private noteService: NoteService,private fileService: FileService) {
+
 
     this.loadTree(this.path);
 
@@ -104,7 +119,7 @@ export class FileSystemComponent {
     console.log(result);
     let exists = this.checkIfFileExists(name);
       if (!exists) {
-        console.log("fiel does not exist");
+        console.log("file does not exist");
           this.tree.push({
             name: name,
             path: this.path + "/" + name,

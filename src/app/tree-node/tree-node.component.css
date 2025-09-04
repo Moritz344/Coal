@@ -2,7 +2,38 @@
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  background-color: transparent;
+  transition: 0.3s ease;
 
+}
+
+details[open] .arrow-wrapper {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.arrow-wrapper {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease;
+  margin-right: 5px;          /* Abstand zum Text */
+}
+
+.arrow-wrapper {
+  display: inline-block;             /* nötig für transform */
+  transition: transform 0.3s ease;   /* sanfte Drehung */
+  margin-right: 5px;
+}
+
+
+.tree-node:hover{
+  background-color: var(--bg-dark);
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+}
+
+.tree-node a:hover{
+  color: white;
 }
 
 

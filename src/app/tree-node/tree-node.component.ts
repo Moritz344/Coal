@@ -6,7 +6,6 @@ import { NoteService } from '../services/note.service';
 import { NoteFile } from '../models/note-file.model';
 import { FileService } from '../services/file.service';
 
-
 @Component({
   selector: 'app-tree-node',
   imports: [RouterModule,CommonModule,FormsModule],
@@ -19,41 +18,49 @@ export class TreeNodeComponent {
   note: any;
   noteContent: any;
   noteDir: any;
-  rawFiles: NoteFile[] = [];
+  rawFiles: any = [];
+
   onlyFiles: string[] = [];
-  path: string = "/home/moritz/Dokumente";
+  path: string = "/home/moritz/Dokumente/test";
   isEditing: boolean = false;
 
-  constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {}
+
+  async loadFiles() {
+    this.rawFiles = await this.fileService.readDir(this.path);
+
+  }
+
+  constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {
+    this.loadFiles();
+  }
 
   startEditing() {
-    console.log("start editing");
     this.isEditing = true;
   }
 
   stopEditing() {
-    console.log("stop editing");
     this.isEditing = false;
   }
 
 
-  onNameChange(name: string,oldPath: string) {
+  async onNameChange(name: string,oldPath: string) {
     let newPath = oldPath.split("/");
     newPath[newPath.length - 1] = name;
     const finalPath = newPath.join("/");
+
     this.fileService.renameFile(oldPath,finalPath);
-    console.log("Neuer dateiname",name,"mit pfad",finalPath);
+    console.log("Neuer dateiname",name,"mit pfad",finalPath,"alter pfad",oldPath);
+
+
   }
 
   saveCurrentSelectedNote(name: any,path: string) {
+    console.log("current",name,path);
     let IsItemDirectory = this.findItemWithName(name);
     if (!IsItemDirectory) {
       this.noteService.currentSelectedNote = [{name: name,path: path,content: "", isDirectory: false}];
-    }else{
-      this.noteService.currentSelectedNote = [];
     }
-    //console.log(this.noteService.currentSelectedNote);
-    console.log("file name",name);
+      console.log(IsItemDirectory);
   }
 
   findItemWithName(name: string): boolean {
@@ -65,6 +72,7 @@ export class TreeNodeComponent {
       }
 
     }
+    console.log(this.rawFiles);
     return false;
   }
 }

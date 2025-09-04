@@ -65,10 +65,15 @@ input {
 
 }
 
+details summary{
+  list-style: none;
+  cursor:pointer;
+}
+
 
 input:hover {
 
-  background-color: var(--panel-dark);
+  background-color: var(--bg-dark);
 
 }
 
@@ -87,9 +92,6 @@ a {
   border-radius: 10px;
 }
 
-a:hover {
-  color: var(--emerald-dark);
-}
 
 
 button {

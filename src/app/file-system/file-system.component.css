@@ -9,10 +9,41 @@ li{
   color: var(--warning);
 }
 
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes popOut {
+  from {
+    opacity: 1;
+    transform: translateY(0px) scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+}
+
+
+
+
 .file-container{
   position: absolute;
   left: 0px;
   height: 100vw;
   padding: 20px;
-  background-color: black;
+  background-color: var(--panel-dark);
+
+
 }
+
+.file-container.active{
+  animation: popIn 0.2s ;
+}
+

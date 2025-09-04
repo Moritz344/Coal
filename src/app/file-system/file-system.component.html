@@ -1,9 +1,20 @@
 
-<div class="file-container">
+@if (toggleTree() ) {
+  <div class="file-container" [class.active]="toggleTree()" >
 
-  <button (click)="createNote('Untitled.md')">Add File</button>
-  <button (click)="createFolder('Untitled')">Add Directory</button>
-  <app-tree-node *ngFor="let node of tree" [node]="node"></app-tree-node>
+    <button (click)="createNote('Untitled.md')">
+    <img src="addFile.svg" width="20" height="20">
 
-</div>
+    </button>
+    <button (click)="createFolder('Untitled')">
 
+    <img src="addDir.svg" width="20" height="20">
+    </button>
+
+
+    <app-tree-node *ngFor="let node of tree" [node]="node"></app-tree-node>
+
+  </div>
+
+
+}

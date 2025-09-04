@@ -51,9 +51,10 @@ export class EditorViewComponent implements OnInit {
 
 
   async readingFile() {
-    this.noteContent = await this.fileService.readFile(this.note[0].path);
-
-    console.log("content",this.noteContent);
+    if (!this.note[0].isDirectory) {
+      this.noteContent = await this.fileService.readFile(this.note[0].path);
+      console.log("content",this.noteContent);
+    }
 
 
   }
