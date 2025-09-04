@@ -1,19 +1,21 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,EventEmitter,Output } from '@angular/core';
 import { RouterModule,Router } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NoteService } from '../services/note.service';
 import { NoteFile } from '../models/note-file.model';
 import { FileService } from '../services/file.service';
+import { EditorViewComponent } from '../editor-view/editor-view.component';
 
 @Component({
   selector: 'app-tree-node',
-  imports: [RouterModule,CommonModule,FormsModule],
+  imports: [RouterModule,CommonModule,FormsModule,EditorViewComponent],
   templateUrl: './tree-node.component.html',
   styleUrl: './tree-node.component.css'
 })
 export class TreeNodeComponent {
   @Input() node: any;
+  @Output() nodeSelected = new EventEmitter<any>();
 
   note: any;
   noteContent: any;
@@ -27,7 +29,6 @@ export class TreeNodeComponent {
 
   async loadFiles() {
     this.rawFiles = await this.fileService.readDir(this.path);
-
   }
 
   constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {
@@ -59,7 +60,9 @@ export class TreeNodeComponent {
     let IsItemDirectory = this.findItemWithName(name);
     if (!IsItemDirectory) {
       this.noteService.currentSelectedNote = [{name: name,path: path,content: "", isDirectory: false}];
+      this.nodeSelected.emit(this.node);
     }
+      console.log(this.noteService.currentSelectedNote);
       console.log(IsItemDirectory);
   }
 
@@ -72,7 +75,6 @@ export class TreeNodeComponent {
       }
 
     }
-    console.log(this.rawFiles);
     return false;
   }
 }

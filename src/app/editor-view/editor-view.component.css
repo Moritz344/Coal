@@ -1,8 +1,6 @@
 
 .editor-container{
-  position: absolute;
-  width: 100px;
-  margin-left: 300px;
+  height: 500px;
 }
 
 .editor-container h1{
@@ -11,15 +9,15 @@
 
 
 .editor-text{
-  width: 80vw;
-  height: 98vw;
   margin-left: 10px;
+  height: 850px;
 
 }
 
 textarea{
   cursor: pointer;
   resize: none;
+  width: 1400px;
 
 }
 

@@ -1,20 +1,32 @@
 
 @if (toggleTree() ) {
-  <div class="file-container" [class.active]="toggleTree()" >
+  <div class="container">
+  <div class="file-container" [class.active]="toggleTree()" #resizable >
 
     <button (click)="createNote('Untitled.md')">
-    <img src="addFile.svg" width="20" height="20">
-
+      <img src="addFile.svg" width="20" height="20">
     </button>
+
     <button (click)="createFolder('Untitled')">
-
-    <img src="addDir.svg" width="20" height="20">
+      <img src="addDir.svg" width="20" height="20">
     </button>
 
 
-    <app-tree-node *ngFor="let node of tree" [node]="node"></app-tree-node>
+    <app-tree-node *ngFor="let node of tree"
+                  [node]="node"
+                  (nodeSelected)="onNodeSelected($event)">
+    </app-tree-node>
+    <div class="resizer" (mousedown)="initResize($event)"></div>
+  </div>
+    <app-editor-view
+    [node]="selectedNode"
+
+    >
+    </app-editor-view>
+
 
   </div>
 
-
 }
+
+

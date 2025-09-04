@@ -1,4 +1,4 @@
-import { Component,OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component,OnChanges,ViewChild,ElementRef,Input,SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './editor-view.component.html',
   styleUrl: './editor-view.component.css'
 })
-export class EditorViewComponent implements OnInit {
+export class EditorViewComponent implements OnChanges {
+
+  @Input() node: any;
 
   note: any;
   noteName: any;
@@ -21,27 +23,22 @@ export class EditorViewComponent implements OnInit {
 
   constructor(private noteService: NoteService,
               private fileService: FileService,
-             private route: ActivatedRoute) {}
+             private route: ActivatedRoute) {
+
+            console.log("hello");
+
+             }
 
 
-  ngOnInit():void {
-      this.route.paramMap.subscribe(params => {
-      const name = params.get('name');
-      if (name) {
-        this.note = this.noteService.getCurrentSelectedNote();
-        if (this.note.length >= 1) {
-          this.noteName = this.note?.[0].name;
-          console.log("single note",this.noteContent);
+  ngOnChanges(changes: SimpleChanges) {
+      this.note = [this.node];
+      this.noteName = this.node.name;
+      this.readingFile();
 
-        }
-          // reading file in currentSelected mitschicken
-          this.readingFile();
-      }
-    });
-
-
-
+      console.log(this.note);
   }
+
+
 
   async saveCurrentFile() {
     let result = await this.fileService.saveFile(this.note[0].path,this.noteContent);

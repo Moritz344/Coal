@@ -1,4 +1,4 @@
-    <div class="tree-node" (click)="saveCurrentSelectedNote(node.name,node.path) ; router.navigate(['/note', node.name])">
+    <div class="tree-node" (click)="saveCurrentSelectedNote(node.name,node.path) ">
       <ng-container *ngIf="node.isDirectory; else fileTemplate">
 
         @if (isEditing) {
@@ -42,12 +42,12 @@
             (change)="onNameChange(node.name,node.path)"
             (blur)="stopEditing()"
             (keydown.enter)="stopEditing()"
-            (click)="saveCurrentSelectedNote(node.name, node.path); router.navigate(['/note', node.name])"
-
+            (click)="saveCurrentSelectedNote(node.name, node.path)"
             />
 
+
           }@else{
-            <a class="file" (dblclick)="startEditing()" [routerLink]="['/note', node.name]" (click)="saveCurrentSelectedNote(node.name,node.path)">
+            <a class="file" (dblclick)="startEditing()" (click)="saveCurrentSelectedNote(node.name,node.path)">
             {{ node.name }}
           </a>
           }
