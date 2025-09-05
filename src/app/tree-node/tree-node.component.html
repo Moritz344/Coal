@@ -1,7 +1,10 @@
-    <div class="tree-node" (click)="saveCurrentSelectedNote(node.name,node.path) ">
-      <ng-container *ngIf="node.isDirectory; else fileTemplate">
 
-        @if (isEditing) {
+
+    <div class="tree-node" (click)="saveCurrentSelectedNote(node.name,node.path) ">
+      <ng-container *ngIf="node.isDirectory ; else fileTemplate">
+
+
+        @if (isEditing || isRenamingNode  ) {
             <input
             type="text"
             class="file"
@@ -34,7 +37,7 @@
       <div class="file-names">
         <ng-template #fileTemplate>
 
-          @if (isEditing) {
+          @if (isEditing ||  isRenamingNode) {
             <input
             type="text"
             class="file"

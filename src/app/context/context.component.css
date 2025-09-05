@@ -1,0 +1,10 @@
+.hover-card{
+  position: absolute;
+  background: var(--bg-dark);
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  max-width: 500px;
+  border-radius: 10px;
+}
+

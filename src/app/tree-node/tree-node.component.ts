@@ -1,4 +1,4 @@
-import { Component,Input,EventEmitter,Output } from '@angular/core';
+import { Component,OnChanges,Input,EventEmitter,Output,SimpleChanges } from '@angular/core';
 import { RouterModule,Router } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +13,9 @@ import { EditorViewComponent } from '../editor-view/editor-view.component';
   templateUrl: './tree-node.component.html',
   styleUrl: './tree-node.component.css'
 })
-export class TreeNodeComponent {
-  @Input() node: any;
+export class TreeNodeComponent implements OnChanges {
+  @Input() node: any = null;
+  @Input() action: any = null;
   @Output() nodeSelected = new EventEmitter<any>();
 
   note: any;
@@ -26,6 +27,8 @@ export class TreeNodeComponent {
   path: string = "/home/moritz/Dokumente/test";
   isEditing: boolean = false;
 
+  renameNode:any;
+
 
   async loadFiles() {
     this.rawFiles = await this.fileService.readDir(this.path);
@@ -33,7 +36,23 @@ export class TreeNodeComponent {
 
   constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {
     this.loadFiles();
+
+
+
   }
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.action  ) {
+      this.renameNode = this.action;
+      console.log(this.renameNode,);
+    }
+  }
+
+
+  get isRenamingNode(): boolean {
+  return this.renameNode?.[0]?.type === "rename" && this.renameNode?.[0]?.data.path === this.node.path;
+}
+
+
 
   startEditing() {
     this.isEditing = true;
@@ -41,6 +60,7 @@ export class TreeNodeComponent {
 
   stopEditing() {
     this.isEditing = false;
+    this.renameNode = null;
   }
 
 

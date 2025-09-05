@@ -25,7 +25,6 @@ export class EditorViewComponent implements OnChanges {
               private fileService: FileService,
              private route: ActivatedRoute) {
 
-            console.log("hello");
 
              }
 

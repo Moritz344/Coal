@@ -77,6 +77,34 @@ app-editor-view {
 
 }
 
+.not-selected{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.not-selected img{
+  opacity: 0.5;
+  transition: 0.3s ease;
+}
+
+.not-selected span{
+  opacity: 0.5;
+  transition: 0.3s ease;
+}
+
+.not-selected span:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+.not-selected img:hover{
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
 .file-container.active{
   animation: popIn 0.2s ;
 }

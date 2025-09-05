@@ -6,6 +6,7 @@ import { EditorViewComponent } from '../editor-view/editor-view.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
+import { ContextComponent } from '../context/context.component';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
@@ -13,7 +14,7 @@ import { NoteFile } from '../models/note-file.model';
 
 @Component({
   selector: 'app-file-system',
-  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent],
+  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
@@ -27,6 +28,11 @@ export class FileSystemComponent {
   @Input() node: any;
   toggleTree = signal(true);
   selectedNode: any;
+
+  hoverX = 0;
+  hoverY = 0;
+  showContextMenu = false;
+  contextAction: any;
 
 
   private startX = 0;
@@ -52,6 +58,30 @@ export class FileSystemComponent {
   stopResize = () => {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.stopResize);
+  }
+
+  showContextCard(event: MouseEvent,node: any) {
+      this.updateHoverPosition(event);
+      this.showContextMenu = true;
+      this.selectedNode = node;
+      this.contextAction = null;
+      console.log("selected",this.selectedNode);
+  }
+
+  hideHoverCard(event: MouseEvent) {
+    this.showContextMenu = false;
+    this.contextAction = null;
+  }
+
+  onContextAction(action: any) {
+    this.contextAction = action;
+    this.showContextMenu = false;
+    console.log("on context action ",this.contextAction);
+  }
+
+  updateHoverPosition(event: MouseEvent) {
+    this.hoverX = event.pageX;
+    this.hoverY = event.pageY;
   }
 
   onNodeSelected(node: any) {

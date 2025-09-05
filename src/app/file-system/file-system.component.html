@@ -12,21 +12,49 @@
     </button>
 
 
-    <app-tree-node *ngFor="let node of tree"
-                  [node]="node"
-                  (nodeSelected)="onNodeSelected($event)">
-    </app-tree-node>
+    <div *ngFor="let node of tree"
+         (contextmenu)="showContextCard($event, node)"
+         (click)="hideHoverCard($event)">
+      <app-tree-node
+        [node]="node"
+        [action]="contextAction"
+        (nodeSelected)="onNodeSelected($event)">
+      </app-tree-node>
+    </div>
+
+
     <div class="resizer" (mousedown)="initResize($event)"></div>
   </div>
-    <app-editor-view
-    [node]="selectedNode"
+    @if (this.selectedNode) {
+      <app-editor-view
+      [node]="selectedNode"
+      (click)="hideHoverCard($event)"
+      >
+      </app-editor-view>
+    }@else{
 
-    >
-    </app-editor-view>
+      <div class="not-selected"
+      (click)="hideHoverCard($event)"
+      >
+        <span>No file selected!</span>
+      <img src="play.png" width="100" height="100">
+
+      </div>
+
+    }
 
 
   </div>
 
 }
 
+    @if (showContextMenu) {
+      <app-context
+      [file]="selectedNode"
+      [x]="hoverX"
+      [y]="hoverY"
+      (fileEmit)="onContextAction($event)"
+      >
+      </app-context>
+    }
 
