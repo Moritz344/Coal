@@ -55,6 +55,16 @@ ipcMain.handle('dialog:openFile', async () => {
   if (canceled) return null;
   return filePaths[0];
 });
+// delete file
+ipcMain.handle('fs:deleteFile', async (event, filePath ) => {
+  try {
+      await fs.promises.rm(filePath);
+      return true;
+  } catch(err) {
+    console.error("Error beim löschen",err);
+    return { success: false,erorr: err }
+  }
+});
 
 // read file
 ipcMain.handle('fs:readFile', async (event, filePath) => {
@@ -71,6 +81,8 @@ ipcMain.handle('fs:saveFile', async (event, filePath , content) => {
     return { success: false,erorr: err }
   }
 });
+
+
 // rename file
 ipcMain.handle('fs:rename', async (event, oldPath, newPath) => {
   try {

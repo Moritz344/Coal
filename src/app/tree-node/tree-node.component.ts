@@ -28,10 +28,15 @@ export class TreeNodeComponent implements OnChanges {
   isEditing: boolean = false;
 
   renameNode:any;
+  nodeToDelete: any;
 
 
   async loadFiles() {
     this.rawFiles = await this.fileService.readDir(this.path);
+  }
+
+  async deleteFileFunc(path: string) {
+      this.fileService.deleteFile(path);
   }
 
   constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {
@@ -41,7 +46,7 @@ export class TreeNodeComponent implements OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (this.action  ) {
+    if (this.action && this.action[0].type === "rename" ) {
       this.renameNode = this.action;
       console.log(this.renameNode,);
     }

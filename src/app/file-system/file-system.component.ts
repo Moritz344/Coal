@@ -34,6 +34,8 @@ export class FileSystemComponent {
   showContextMenu = false;
   contextAction: any;
 
+  countFileName = 0;
+
 
   private startX = 0;
   private startWidth = 0;
@@ -77,11 +79,30 @@ export class FileSystemComponent {
     this.contextAction = action;
     this.showContextMenu = false;
     console.log("on context action ",this.contextAction);
+
+    if (this.contextAction && this.contextAction[0].type === "delete") {
+      this.deleteFileOnContextAction();
+    }
+  }
+
+  deleteFileOnContextAction() {
+      console.log("node to delete",this.contextAction[0].data.path);
+
+      for (let i=0;i<this.tree.length;i++) {
+        if (this.tree[i].path === this.contextAction[0].data.path) {
+          this.tree.splice(i,1);
+          this.fileService.deleteFile(this.contextAction[0].data.path);
+        }
+
+      }
+
+      console.log(this.tree);
+
   }
 
   updateHoverPosition(event: MouseEvent) {
-    this.hoverX = event.pageX;
-    this.hoverY = event.pageY;
+    this.hoverX = event.pageX ;
+    this.hoverY = event.pageY - 100;
   }
 
   onNodeSelected(node: any) {
@@ -173,13 +194,12 @@ export class FileSystemComponent {
           });
           console.log(this.path);
 
-    }else {
-      alert("Directory with this name already exists");
     }
   }
 
   async createNote(name: string) {
     let result = await this.fileService.saveFile(this.path + "/" + name,"");
+    this.countFileName += 1;
     console.log(result);
     let exists = this.checkIfFileExists(name);
       if (!exists) {
@@ -189,8 +209,6 @@ export class FileSystemComponent {
             path: this.path + "/" + name,
             isDirectory: false
           });
-      }else {
-        alert("File with that name already exists");
       }
 
       console.log(name,this.path + "/" + name);

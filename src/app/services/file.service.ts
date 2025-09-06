@@ -20,6 +20,11 @@ export class FileService {
   async saveFile(filePath: string, content: string): Promise<boolean> {
     return await (window as any).electronAPI.saveFile(filePath, content);
   }
+
+  async deleteFile(filePath: string): Promise<boolean> {
+    return await (window as any).electronAPI.deleteFile(filePath);
+  }
+
   async renameFile(oldPath: string, newPath: string): Promise<boolean> {
     return await (window as any).electronAPI.rename(oldPath, newPath);
   }

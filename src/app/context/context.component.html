@@ -3,8 +3,20 @@
     [ngStyle]="{ top: y + 'px', left: x + 'px' }"
     >
 
-    <button (click)="onRename()">Rename </button> <br>
+    <div class="rename-container">
+      <button (click)="onRename()">
+        <img src="rename.svg">
+        <span>Rename</span>
+      </button> <br>
+    </div>
 
-    <button>Delete</button>
+
+    <div class="delete-container">
+      <button  (click)="onDelete()">
+        <img src="remove.svg" >
+        <span>Delete</span>
+      </button>
+
+    </div>
 
 </div>

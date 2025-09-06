@@ -1,10 +1,41 @@
 .hover-card{
   position: absolute;
-  background: var(--bg-dark);
+  background: var(--panel-dark);
   border: 1px solid #ccc;
   padding: 10px;
   z-index: 1000;
   max-width: 500px;
   border-radius: 10px;
+}
+
+.rename-container span{
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.delete-container span{
+  font-size: 20px;
+  margin-left: 5px;
+
+}
+
+.delete-container button {
+  display:flex;
+  width: 200px;
+  justify-content: left;
+}
+.rename-container button {
+  display:flex;
+  width: 200px;
+  justify-content: left;
+}
+
+
+
+.rename-container img,
+.delete-container img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 8px;
 }
 

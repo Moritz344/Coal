@@ -35,5 +35,10 @@ export class ContextComponent implements OnChanges {
     this.fileEmit.emit(this.contextAction);
   }
 
+  onDelete() {
+    this.contextAction = [{type: "delete",data: this.file }];
+    this.fileEmit.emit(this.contextAction);
+
+  }
 
 }

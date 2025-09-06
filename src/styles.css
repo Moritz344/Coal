@@ -105,7 +105,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--emerald-dark);
+  background-color: var(--bg-dark);
 }
 
 /* Panels / Sidebar */
