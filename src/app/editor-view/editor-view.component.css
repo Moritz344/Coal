@@ -11,13 +11,19 @@
 .editor-text{
   margin-left: 10px;
   height: 850px;
+  width: 1400px;
+
+}
+
+.editor-text-zen{
+  width: 1800px;
+  height: 850px;
 
 }
 
 textarea{
   cursor: pointer;
   resize: none;
-  width: 1400px;
 
 }
 

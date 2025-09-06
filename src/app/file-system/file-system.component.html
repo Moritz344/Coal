@@ -1,7 +1,12 @@
 
-@if (toggleTree() ) {
+
   <div class="container">
-  <div class="file-container" [class.active]="toggleTree()" #resizable >
+  <app-sidebar
+  [toggleTree]="toggleTree"
+  (toggleResult)="onSideBarAction($event)"
+  ></app-sidebar>
+  <div class="file-container" *ngIf="toggleTree()"  [class.active]="toggleTree()" #resizable >
+
 
     <button (click)="createNote('Untitled.md')">
       <img src="addFile.svg" width="20" height="20">
@@ -9,6 +14,10 @@
 
     <button (click)="createFolder('Untitled')">
       <img src="addDir.svg" width="20" height="20">
+    </button>
+
+    <button >
+      <img src="settings.svg" width="20" height="20">
     </button>
 
 
@@ -28,6 +37,7 @@
     @if (this.selectedNode) {
       <app-editor-view
       [node]="selectedNode"
+      [toggleWidth]="toggleTree"
       (click)="hideHoverCard($event)"
       >
       </app-editor-view>
@@ -46,7 +56,6 @@
 
   </div>
 
-}
 
     @if (showContextMenu) {
       <app-context
@@ -57,4 +66,5 @@
       >
       </app-context>
     }
+
 

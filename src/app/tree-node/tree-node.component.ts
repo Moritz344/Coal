@@ -68,6 +68,12 @@ export class TreeNodeComponent implements OnChanges {
     this.renameNode = null;
   }
 
+  updateNotePath(path: string) {
+    console.log(this.node);
+    this.node.path = path;
+
+  }
+
 
   async onNameChange(name: string,oldPath: string) {
     let newPath = oldPath.split("/");
@@ -75,6 +81,7 @@ export class TreeNodeComponent implements OnChanges {
     const finalPath = newPath.join("/");
 
     this.fileService.renameFile(oldPath,finalPath);
+    this.updateNotePath(finalPath);
     console.log("Neuer dateiname",name,"mit pfad",finalPath,"alter pfad",oldPath);
 
 

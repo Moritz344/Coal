@@ -1,12 +1,23 @@
 <div class="editor-container" >
   <h1>{{ noteName }}</h1>
 
+
   <div class="textbox">
-    <textarea
-      (change)="saveCurrentFile()"
-      [(ngModel)]="noteContent"
-      class="editor-text">
-    </textarea>
+    @if (toggleWidth()) {
+      <textarea
+        (change)="saveCurrentFile()"
+        [(ngModel)]="noteContent"
+        class="editor-text">
+      </textarea>
+
+      }@else{
+      <textarea
+        (change)="saveCurrentFile()"
+        [(ngModel)]="noteContent"
+        class="editor-text-zen">
+      </textarea>
+
+      }
 
   </div>
 

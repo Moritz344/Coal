@@ -1,0 +1,25 @@
+.container{
+  background-color: var(--bg-dark);
+  height: 100%;
+  width: 50px;
+
+}
+
+
+.container button{
+
+  transition: 0.3s ease;
+  background: transparent;
+  margin-top: 15px;
+}
+
+.container button.rotated {
+  transform: rotate(-180deg);
+}
+.container.toggle{
+
+  background-color: var(--panel-dark);
+}
+
+
+

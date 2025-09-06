@@ -7,14 +7,16 @@ import { RouterModule } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
+// BUG: bei rename file -> editor view | wird zwar bennant aber editor view findet datei nicht mehr
 
 @Component({
   selector: 'app-file-system',
-  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent],
+  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
@@ -85,6 +87,10 @@ export class FileSystemComponent {
     }
   }
 
+  onSideBarAction(toggle: boolean) {
+    this.toggleTree.update((toggle) => !toggle);
+  }
+
   deleteFileOnContextAction() {
       console.log("node to delete",this.contextAction[0].data.path);
 
@@ -116,9 +122,6 @@ export class FileSystemComponent {
     }
   }
 
-  onNameChange(name: string,path: string) {
-    console.log(name,path);
-  }
 
   toggleFileTreeButton() {
     this.toggleTree.update((v) => !v);

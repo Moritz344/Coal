@@ -8,16 +8,16 @@
   border-radius: 10px;
 }
 
-.rename-container span{
-  font-size: 20px;
-  margin-left: 5px;
-}
-
-.delete-container span{
-  font-size: 20px;
+span{
+  font-size: 15px;
   margin-left: 5px;
 
 }
+
+img {
+  width: 20px;
+}
+
 
 .delete-container button {
   display:flex;

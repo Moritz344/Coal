@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class EditorViewComponent implements OnChanges {
 
   @Input() node: any;
+  @Input() toggleWidth: any;
 
   note: any;
   noteName: any;
