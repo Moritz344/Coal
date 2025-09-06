@@ -20,7 +20,6 @@ export class FileService {
   async saveFile(filePath: string, content: string): Promise<boolean> {
     return await (window as any).electronAPI.saveFile(filePath, content);
   }
-
   async deleteFile(filePath: string): Promise<boolean> {
     return await (window as any).electronAPI.deleteFile(filePath);
   }

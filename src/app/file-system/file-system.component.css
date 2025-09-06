@@ -51,9 +51,7 @@ li{
 
 }
 
-button.rotated{
-transform: rotate(-180deg);
-}
+
 
 .file-container * {
   user-select: none;
