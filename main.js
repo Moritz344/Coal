@@ -55,6 +55,16 @@ ipcMain.handle('dialog:openFile', async () => {
   if (canceled) return null;
   return filePaths[0];
 });
+
+// open dir
+ipcMain.handle('dialog:openPath', async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile','openDirectory'],
+  });
+  if (canceled) return null;
+  return filePaths[0];
+});
+
 // delete file
 ipcMain.handle('fs:deleteFile', async (event, filePath ) => {
   try {

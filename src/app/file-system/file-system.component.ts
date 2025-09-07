@@ -8,21 +8,27 @@ import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SettingsComponent } from '../settings/settings.component';
+
+import { MatDialog} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
-// BUG: bei rename file -> editor view | wird zwar bennant aber editor view findet datei nicht mehr
 
 @Component({
   selector: 'app-file-system',
-  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent],
+  standalone: true,
+  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
+  ,MatDialogModule,MatButtonModule],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
 export class FileSystemComponent {
 
-  path = "/home/moritz/Dokumente/test";
+  path = "";
   rawFiles: NoteFile[] = [];
   noteContent: any;
   tree: any;
@@ -57,6 +63,13 @@ export class FileSystemComponent {
   onMouseMove = (event: MouseEvent) => {
     const newWidth = this.startWidth + (event.clientX - this.startX);
     this.resizable.nativeElement.style.width = newWidth + 'px';
+  }
+
+  onSettings() {
+    this.dialog.open(SettingsComponent, {
+      width: '500px',
+      panelClass: 'container'
+    });
   }
 
   stopResize = () => {
@@ -127,10 +140,16 @@ export class FileSystemComponent {
     this.toggleTree.update((v) => !v);
   }
 
-  constructor(private noteService: NoteService,private fileService: FileService) {
+  constructor(private noteService: NoteService,private fileService: FileService,private dialog: MatDialog) {
 
 
-    this.loadTree(this.path);
+      this.noteService.currentPath$.subscribe(path => {
+        if (!path) return;
+        this.path = path;
+        this.loadTree(this.path);
+        console.log("PFAD aktualisiert:", this.path);
+      });
+
 
 
   }

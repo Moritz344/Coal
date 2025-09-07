@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-editor-view',
   imports: [FormsModule],
+  standalone: true,
   templateUrl: './editor-view.component.html',
   styleUrl: './editor-view.component.css'
 })

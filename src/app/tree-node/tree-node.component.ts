@@ -9,6 +9,7 @@ import { EditorViewComponent } from '../editor-view/editor-view.component';
 
 @Component({
   selector: 'app-tree-node',
+  standalone: true,
   imports: [RouterModule,CommonModule,FormsModule,EditorViewComponent],
   templateUrl: './tree-node.component.html',
   styleUrl: './tree-node.component.css'
@@ -24,7 +25,7 @@ export class TreeNodeComponent implements OnChanges {
   rawFiles: any = [];
 
   onlyFiles: string[] = [];
-  path: string = "/home/moritz/Dokumente/test";
+  path: string = "";
   isEditing: boolean = false;
 
   renameNode:any;
@@ -42,6 +43,7 @@ export class TreeNodeComponent implements OnChanges {
   constructor (private noteService: NoteService,public router: Router,private fileService: FileService) {
     this.loadFiles();
 
+    this.path = this.noteService.getCurrentPath();
 
 
   }

@@ -46,6 +46,9 @@ body {
   padding: 0;
 }
 
+
+
+
 textarea{
 
   background-color: var(--bg-dark);
@@ -156,3 +159,6 @@ body.light-mode .secondary-text {
   color: var(--text-secondary-light);
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

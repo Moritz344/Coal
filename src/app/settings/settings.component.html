@@ -1,1 +1,29 @@
-<p>settings works!</p>
+
+<div class="container">
+  <div class="left-buttons">
+    <button (click)="setOption('general')"mat-button>
+      <span>General</span>
+    </button>
+    <button (click)="setOption('editor')"mat-button>
+      <span>Editor</span>
+    </button>
+    <button (click)="setOption('about')" mat-button>
+      <span>About</span>
+    </button>
+
+  </div>
+    <button class="exit"(click)="close()"mat-button>
+      <img src="close.svg">
+    </button>
+
+    <div class="content-container">
+      @if (settingsOption === "general") {
+          <app-general></app-general>
+        }@else if (settingsOption === "editor") {
+          <app-editor></app-editor>
+        }@else if (settingsOption === "about") {
+          <app-about></app-about>
+        }
+    </div>
+</div>
+

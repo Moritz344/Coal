@@ -1,0 +1,66 @@
+
+
+.container h1{
+  font-size: 20px;
+  margin-left: 10px;
+  color: var(--emerald-dark);
+}
+
+input{
+  border: 1px solid white;
+  border-radius: 5px;
+}
+button{
+  background-color: var(--panel-dark);
+}
+button:hover{
+  background-color: var(--emerald-dark);
+}
+
+.options{
+  border-top: 1px solid white;
+}
+
+
+.options p{
+  margin-left: 10px;
+}
+
+.options a{
+  color: lightblue;
+}
+
+.browse {
+  margin-left: 10px;
+}
+
+.socials{
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.icons{
+  margin-top: 10px;
+}
+
+.icons li{
+  margin-left: 10px;
+}
+
+.icons span{
+  color: grey;
+  margin-left: 10px;
+}
+
+img{
+  transition: 0.3s ease;
+  opacity: 0.5;
+}
+
+img:hover{
+  transform: scale(1.02);
+  opacity: 5;
+}
+
+

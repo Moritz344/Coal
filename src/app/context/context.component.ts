@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-context',
   imports: [FormsModule,CommonModule],
+  standalone: true,
   templateUrl: './context.component.html',
   styleUrl: './context.component.css'
 })

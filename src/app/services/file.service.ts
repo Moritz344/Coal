@@ -11,6 +11,12 @@ export class FileService {
     const content = await (window as any).electronAPI.readFile(filePath);
     return { filePath, content };
   }
+  async openPath(): Promise<{ filePath: string, } | null> {
+    const filePath = await (window as any).electronAPI.openPath();
+    if (!filePath) return null;
+
+    return { filePath };
+  }
 
   async readFile(filePath: string): Promise<string> {
     const content = await (window as any).electronAPI.readFile(filePath);
