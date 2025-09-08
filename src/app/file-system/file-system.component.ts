@@ -14,17 +14,19 @@ import { MatDialog} from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
+import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop';
+
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
 // BUGS: wrong container height if smaller window / renaming files in directories -> input element black and width too long /
-// handle no permission for files 
+// handle no permission for files
 
 @Component({
   selector: 'app-file-system',
   standalone: true,
   imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
-  ,MatDialogModule,MatButtonModule],
+  ,MatDialogModule,MatButtonModule,DragDropModule],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
@@ -52,6 +54,11 @@ export class FileSystemComponent {
 
   @ViewChild('resizable') resizable!: ElementRef;
   @HostListener('window:keydown', ['$event'])
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  }
+
 
   initResize(event: MouseEvent) {
     if (!this.resizable) return;

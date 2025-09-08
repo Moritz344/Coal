@@ -91,24 +91,11 @@ export class TreeNodeComponent implements OnChanges {
 
   saveCurrentSelectedNote(name: any,path: string) {
     console.log("current",name,path);
-    let IsItemDirectory = this.findItemWithName(name);
-    if (!IsItemDirectory) {
+    if (!this.node.isDirectory) {
       this.noteService.currentSelectedNote = [{name: name,path: path,content: "", isDirectory: false}];
       this.nodeSelected.emit(this.node);
     }
       console.log(this.noteService.currentSelectedNote);
-      console.log(IsItemDirectory);
   }
 
-  findItemWithName(name: string): boolean {
-    for (let i=0;i<this.rawFiles.length;i++) {
-      if (this.rawFiles[i].name.includes(name)) {
-          if (this.rawFiles[i].isDirectory) {
-            return this.rawFiles[i].isDirectory;
-          }
-      }
-
-    }
-    return false;
-  }
 }

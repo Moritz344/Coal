@@ -20,14 +20,17 @@
     </button>
 
 
-    <div *ngFor="let node of tree"
+    <div cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
          (contextmenu)="showContextCard($event, node)"
          (click)="hideHoverCard($event)">
-      <app-tree-node
-        [node]="node"
-        [action]="contextAction"
-        (nodeSelected)="onNodeSelected($event)">
-      </app-tree-node>
+      <div *ngFor="let node of tree">
+        <app-tree-node
+          [node]="node"
+          [action]="contextAction"
+          (nodeSelected)="onNodeSelected($event)"
+          cdkDrag>
+        </app-tree-node>
+      </div>
     </div>
 
 

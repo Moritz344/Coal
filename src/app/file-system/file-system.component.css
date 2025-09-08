@@ -46,7 +46,7 @@ li{
   padding: 20px;
   background-color: var(--panel-dark);
   line-height:3em;
-  overflow: scroll;
+  overflow: auto;
 
 
 }
