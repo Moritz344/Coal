@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
+// BUGS: wrong container height if smaller window / renaming files in directories -> input element black and width too long /
+// handle no permission for files 
 
 @Component({
   selector: 'app-file-system',
