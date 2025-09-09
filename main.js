@@ -28,15 +28,27 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
+function checkIfItemIsImage(item ) {
+
+  const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.svg'];
+
+  const ext = path.extname(item.name).toLowerCase();
+
+  return imageExtensions.includes(ext);
+
+}
+
+
 // read path
 ipcMain.handle('fs:readDir', async (event, dirPath) => {
   try {
     const items = await fs.promises.readdir(dirPath, { withFileTypes: true });
-    // Gib ein Array von Objekten zurück: { name, path, isDirectory }
+
     return items.map(item => ({
       name: item.name,
       path: path.join(dirPath, item.name),
-      isDirectory: item.isDirectory()
+      isDirectory: item.isDirectory(),
+      isImage: !item.isDirectory() && checkIfItemIsImage(item)
     }));
   } catch (err) {
     console.error(err);

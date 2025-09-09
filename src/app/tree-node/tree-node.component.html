@@ -4,7 +4,7 @@
       <ng-container *ngIf="node.isDirectory ; else fileTemplate">
 
 
-        @if (isEditing || isRenamingNode  ) {
+        @if (isEditing || isRenamingNode ) {
             <input
             type="text"
             class="file"
@@ -17,18 +17,17 @@
             />
 
         }@else{
-        <details >
+        <details>
           <summary (dblclick)="startEditing()">
            <span class="arrow-wrapper">
-
-           <img src="arrow.svg" width="20">
-
+            <img class="arrow" src="arrow.svg" width="20">
            </span>
+           <img class="folder-icon" src="folder.svg">
            {{ node.name }}
           </summary>
 
           @for(child of node.children; track $index) {
-          <app-tree-node [node]="child"></app-tree-node>
+          <app-tree-node [node]="child" ></app-tree-node>
           }
         </details>
 
@@ -50,6 +49,11 @@
 
 
           }@else{
+           @if (node.isImage) {
+            <img src="image.svg">
+           }@else{
+            <img src="file.svg">
+           }
             <a class="file" (dblclick)="startEditing()" (click)="saveCurrentSelectedNote(node.name,node.path)">
             {{ node.name }}
           </a>

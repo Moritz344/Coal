@@ -19,18 +19,17 @@
       <img src="settings.svg" width="20" height="20">
     </button>
 
-
-    <div cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
-         (contextmenu)="showContextCard($event, node)"
+    <div class="file-list" cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
          (click)="hideHoverCard($event)">
-      <div *ngFor="let node of tree">
-        <app-tree-node
-          [node]="node"
-          [action]="contextAction"
-          (nodeSelected)="onNodeSelected($event)"
-          cdkDrag>
-        </app-tree-node>
-      </div>
+        <div class="file-box" *ngFor="let node of tree" (contextmenu)="showContextCard($event, node)" >
+          <div class="file-placeholder" *cdkDragPlaceholder></div>
+          <app-tree-node
+            [node]="node"
+            [action]="contextAction"
+            (nodeSelected)="onNodeSelected($event)"
+            cdkDrag>
+          </app-tree-node>
+        </div>
     </div>
 
 

@@ -36,6 +36,12 @@ export class TreeNodeComponent implements OnChanges {
     this.rawFiles = await this.fileService.readDir(this.path);
   }
 
+  loadChildrenLazy() {
+    if (this.node.isDirectory) {
+      this.fileService.loadChildren(this.node);
+    }
+  }
+
   async deleteFileFunc(path: string) {
       this.fileService.deleteFile(path);
   }
@@ -48,16 +54,18 @@ export class TreeNodeComponent implements OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (this.action && this.action[0].type === "rename" ) {
+    if (this.action?.[0].type === "rename" ) {
       this.renameNode = this.action;
-      console.log(this.renameNode,);
+      console.log("rename node",this.renameNode);
     }
   }
 
 
+
+
   get isRenamingNode(): boolean {
-  return this.renameNode?.[0]?.type === "rename" && this.renameNode?.[0]?.data.path === this.node.path;
-}
+    return this.renameNode?.[0]?.type === "rename" && this.renameNode?.[0].data.path === this.node.path;
+  }
 
 
 
@@ -96,6 +104,8 @@ export class TreeNodeComponent implements OnChanges {
       this.nodeSelected.emit(this.node);
     }
       console.log(this.noteService.currentSelectedNote);
+
+      this.loadChildrenLazy();
   }
 
 }

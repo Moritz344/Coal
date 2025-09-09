@@ -42,5 +42,28 @@ export class NoteService {
 
   }
 
+  async buildTree(tree: NoteFile[],files: NoteFile[],path: string): Promise<NoteFile[]>{
+
+    for (const file of files) {
+      if (file.isDirectory) {
+        tree.push({
+          name: file.name,
+          isDirectory: true,
+          path: file.path,
+          children: null,
+        });
+      } else {
+        tree.push({
+          name: file.name,
+          path: file.path,
+          isDirectory: false,
+        });
+      }
+    }
+
+    return tree;
+}
+
+
 
 }

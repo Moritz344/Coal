@@ -15,18 +15,27 @@ details[open] .arrow-wrapper {
 .arrow-wrapper {
   transform: rotate(-90deg);
   transition: transform 0.3s ease;
-  margin-right: 5px;          /* Abstand zum Text */
+  margin-right: 5px;
 }
 
 .arrow-wrapper {
-  display: inline-block;             /* nötig für transform */
-  transition: transform 0.3s ease;   /* sanfte Drehung */
-  margin-right: 5px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  margin-right: 0px;
+}
+
+.folder-icon{
+  position: relative;
+  top: 5px;
+  left: 0;
+}
+
+.folder-name{
+  margin-left: 10px;
 }
 
 
 .tree-node:hover{
-  background-color: var(--bg-dark);
   padding: 5px;
   border-radius: 10px;
   color: white;

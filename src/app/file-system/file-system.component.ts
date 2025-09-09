@@ -56,7 +56,11 @@ export class FileSystemComponent {
   @HostListener('window:keydown', ['$event'])
 
   drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    if (!event.container?.data) {
+      return;
+
+    }
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
   }
 
 
@@ -165,37 +169,24 @@ export class FileSystemComponent {
 
 
 
-  async buildTree(path: string): Promise<Object>{
-    const files = await this.fileService.readDir(path);
-    const tree = [];
+  async buildTreeService(path: string): Promise<NoteFile[]>{
 
-    for (const file of files) {
-      if (file.isDirectory) {
-        tree.push({
-          name: file.name,
-          isDirectory: true,
-          path: file.path,
-          children: await this.buildTree(`${path}/${file.name}`)
-        });
-      } else {
-        tree.push({
-          name: file.name,
-          path: file.path,
-          isDirectory: false
-        });
-      }
-    }
+    let resultTree = this.fileService.buildTree(path);
 
-    //console.log("tree",tree);
-    return tree;
+    return resultTree;
+
 }
+
+  async loadChildrenService(node: NoteFile): Promise<void> {
+    this.fileService.loadChildren(node);
+  }
 
 
   async loadTree(path: string) {
     this.rawFiles = await this.fileService.readDir(path);
     if (this.rawFiles.length >= 1) {
       //console.log(this.rawFiles);
-      this.tree = await this.buildTree(path);
+      this.tree = await this.buildTreeService(path);
       console.log(this.tree);
     }
 
