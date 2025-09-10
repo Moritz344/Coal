@@ -7,6 +7,7 @@ Currently working on this minmal note taking app.
 - [x] make the files dragable in the file tree to change the position
 - [ ] Tabs for files
 - [ ] Markdown support 
+- [ ] make files be dragable to directories
 
 # Author
 - Moritz344
