@@ -3,7 +3,7 @@
 
 
   <div class="textbox">
-    @if (toggleWidth()) {
+    @if (toggleWidth) {
       <textarea
         (change)="saveCurrentFile()"
         [(ngModel)]="noteContent"

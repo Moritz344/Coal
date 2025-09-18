@@ -52,6 +52,7 @@ li{
   background-color: var(--panel-dark);
   line-height:3em;
   overflow: auto;
+  max-width: 500px;
 
 
 }

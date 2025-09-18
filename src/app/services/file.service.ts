@@ -39,6 +39,9 @@ export class FileService {
     return await (window as any).electronAPI.createFolder(path);
   }
 
+  async getDefaultPath(): Promise<string>  {
+    return await (window as any).electronAPI.getDefaultPath();
+  }
 
 
   async readDir(path: string) {

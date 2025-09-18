@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router,RouterOutlet,NavigationEnd } from '@angular/router';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { FileSystemComponent } from './file-system/file-system.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { FileService } from './services/file.service';
+import { NoteService } from './services/note.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -10,11 +14,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'emerald';
+  selectedTree: any;
+  showFrontPage = true;
 
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private fileService: FileService, private noteService: NoteService,) {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log('Angular route:', event.urlAfterRedirects);
@@ -22,4 +30,15 @@ export class AppComponent {
     });
   }
 
+  onShowFrontPage(action: boolean) {
+    this.showFrontPage = action;
+  }
+
+  ngOnInit() {
+    this.fileService.getDefaultPath().then(defaultPath => {
+      this.noteService.setCurrentPath(defaultPath);
+      console.log(defaultPath);
+
+    });
+  }
 }

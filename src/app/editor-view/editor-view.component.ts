@@ -2,8 +2,8 @@ import { Component,OnChanges,ViewChild,ElementRef,Input,SimpleChanges } from '@a
 import { ActivatedRoute } from '@angular/router';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
-import { marked } from 'marked';
 import { FormsModule } from '@angular/forms';
+import { NoteFile } from '../models/note-file.model';
 
 @Component({
   selector: 'app-editor-view',
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class EditorViewComponent implements OnChanges {
 
   @Input() node: any;
-  @Input() toggleWidth: any;
+  @Input() toggleWidth?: any;
 
   note: any;
   noteName: any;
@@ -36,20 +36,20 @@ export class EditorViewComponent implements OnChanges {
       this.noteName = this.node.name;
       this.readingFile();
 
-      console.log(this.note);
+      console.log("editor",this.note);
   }
 
 
 
   async saveCurrentFile() {
-    let result = await this.fileService.saveFile(this.note[0].path,this.noteContent);
+    let result = await this.fileService.saveFile(this.note.path,this.noteContent);
     console.log("saved file",result);
     console.log(this.noteContent);
   }
 
 
   async readingFile() {
-    if (!this.note[0].isDirectory) {
+    if (!this.note[0].isDirectory ) {
       this.noteContent = await this.fileService.readFile(this.note[0].path);
       console.log("content",this.noteContent);
     }

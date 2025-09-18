@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -116,6 +117,19 @@ ipcMain.handle('fs:rename', async (event, oldPath, newPath) => {
   }
 });
 
+// get default path
+ipcMain.handle('os:getDefaultPath', async (event,) => {
+  try {
+    const documentPath = path.join(os.homedir(),'notes/');
+    if (!fs.existsSync(documentPath)) {
+      await fs.promises.mkdir(documentPath,{ recursive: true });
+    }
+    return documentPath;
+  }catch (err) {
+    console.error("Couldn't get pc name");
+  }
+
+});
 
 // create folder
 ipcMain.handle('fs:createFolder', async (event, filePath ) => {

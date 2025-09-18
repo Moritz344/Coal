@@ -1,4 +1,4 @@
-import { Component,Input,HostListener,signal,ElementRef,ViewChild } from '@angular/core';
+import { Component,Input,HostListener,signal,ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { TreeNodeComponent} from '../tree-node/tree-node.component';
@@ -19,8 +19,8 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
-// BUGS: wrong container height if smaller window / renaming files in directories -> input element black and width too long /
-// handle no permission for files
+// TODO: when trying to open a video file -> ignore it
+
 
 @Component({
   selector: 'app-file-system',
@@ -31,13 +31,14 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
   styleUrl: './file-system.component.css'
 })
 export class FileSystemComponent {
+  @Input() node: any;
+  @Output() showFrontPageAction =  new EventEmitter<boolean>;
 
   path = "";
   rawFiles: NoteFile[] = [];
   noteContent: any;
   tree: any;
   pathValue: string = "";
-  @Input() node: any;
   toggleTree = signal(true);
   selectedNode: any;
 
@@ -139,6 +140,7 @@ export class FileSystemComponent {
 
   onNodeSelected(node: any) {
     this.selectedNode = node;
+    this.showFrontPageAction.emit(false);
   }
 
   toggleFileTree(event: KeyboardEvent) {

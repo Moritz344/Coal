@@ -1,0 +1,19 @@
+
+.container{
+  margin-top: 10px;
+  background-color: var(--panel-dark);
+  height: 300px;
+  transition: 0.3s ease;
+  box-shadow: 0px 0px 10px black;
+
+
+}
+
+.container strong{
+  display: flex;
+  justify-content: center;
+}
+
+.container:hover{
+  transform: scale(1.02);
+}

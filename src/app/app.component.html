@@ -1,4 +1,9 @@
+@if (showFrontPage) {
+  <app-front-page></app-front-page>
+}
 
-<app-file-system></app-file-system>
+<app-file-system
+    (showFrontPageAction)="onShowFrontPage($event)"
+  ></app-file-system>
 
 <router-outlet></router-outlet>

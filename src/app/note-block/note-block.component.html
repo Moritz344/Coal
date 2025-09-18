@@ -1,0 +1,14 @@
+
+@if (!this.selectedNote) {
+  @for (note of data; track $index) {
+    <div (click)="onNote(note)"class="container">
+      <strong>{{ note.name }}</strong>
+    </div>
+  }
+}
+
+@if (isNote) {
+      <app-editor-view
+      [node]="selectedNote"
+      ></app-editor-view>
+}
