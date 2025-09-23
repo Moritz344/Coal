@@ -34,6 +34,10 @@ export class AppComponent implements OnInit {
     this.showFrontPage = action;
   }
 
+  onHomepageAction(action: boolean) {
+    this.showFrontPage = action;
+  }
+
   ngOnInit() {
     this.fileService.getDefaultPath().then(defaultPath => {
       this.noteService.setCurrentPath(defaultPath);

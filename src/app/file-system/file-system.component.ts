@@ -8,6 +8,7 @@ import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { FrontPageComponent } from '../front-page/front-page.component';
 import { SettingsComponent } from '../settings/settings.component';
 
 import { MatDialog} from '@angular/material/dialog';
@@ -26,13 +27,14 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
   selector: 'app-file-system',
   standalone: true,
   imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
-  ,MatDialogModule,MatButtonModule,DragDropModule],
+  ,MatDialogModule,MatButtonModule,DragDropModule,FrontPageComponent],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
 export class FileSystemComponent {
   @Input() node: any;
   @Output() showFrontPageAction =  new EventEmitter<boolean>;
+  @Output() showHomepage=  new EventEmitter<boolean>;
 
   path = "";
   rawFiles: NoteFile[] = [];
@@ -49,6 +51,7 @@ export class FileSystemComponent {
 
   countFileName = 0;
 
+  hideEditor= false;
 
   private startX = 0;
   private startWidth = 0;
@@ -84,6 +87,11 @@ export class FileSystemComponent {
       width: '500px',
       panelClass: 'container'
     });
+  }
+
+  onHome() {
+    this.hideEditor = true;
+    this.showHomepage.emit(true);
   }
 
   stopResize = () => {

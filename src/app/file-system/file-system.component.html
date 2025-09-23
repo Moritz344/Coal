@@ -1,10 +1,14 @@
 
-  <div class="container">
+  <div class="container" >
   <app-sidebar
   [toggleTree]="toggleTree"
   (toggleResult)="onSideBarAction($event)"
   ></app-sidebar>
   <div class="file-container" *ngIf="toggleTree()"  [class.active]="toggleTree()" #resizable >
+
+    <button [routerLink]="['/home',]" (click)="onHome()">
+      <img src="home.svg">
+    </button>
 
 
     <button (click)="createNote('Untitled.md')">
@@ -35,7 +39,7 @@
 
     <div class="resizer" (mousedown)="initResize($event)"></div>
   </div>
-    @if (this.selectedNode) {
+    @if (this.selectedNode && hideEditor !== true) {
       <app-editor-view
       [node]="selectedNode"
       [toggleWidth]="toggleTree"
