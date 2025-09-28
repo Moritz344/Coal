@@ -8,18 +8,20 @@
   <h1>{{ noteName }}</h1>
 
 
-  <div class="textbox">
+  <div  class="textbox">
     @if (toggleWidth) {
       <textarea
+        id="editor"
         (change)="saveCurrentFile()"
-         [(ngModel)]="noteContent"
+        [(ngModel)]="noteContent"
         class="editor-text">
       </textarea>
 
       }@else{
       <textarea
+        id="editor"
         (change)="saveCurrentFile()"
-         [(ngModel)]="noteContent"
+        [(ngModel)]="noteContent"
         class="editor-text-zen">
       </textarea>
 
@@ -31,7 +33,7 @@
 </div>
 
 <div *ngIf="showMarkdown" class="markdown-preview">
-    <markdown [data]="noteContent" >
+    <markdown id="editor" [data]="noteContent" >
     </markdown>
 </div>
 

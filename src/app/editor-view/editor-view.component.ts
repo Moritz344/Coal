@@ -1,4 +1,4 @@
-import { Component,OnChanges,ViewChild,ElementRef,Input,SimpleChanges } from '@angular/core';
+import { Component,HostListener,OnChanges,ViewChild,ElementRef,Input,SimpleChanges,AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
@@ -8,6 +8,7 @@ import { provideMarkdown,MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+// TODO: change font/change font-size
 
 @Component({
   selector: 'app-editor-view',
@@ -20,16 +21,48 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-export class EditorViewComponent implements OnChanges {
-
+export class EditorViewComponent implements AfterViewInit,OnChanges{
+  @ViewChild('editor') editor?: ElementRef;
   @Input() node: any;
   @Input() toggleWidth?: any;
 
   note: any;
   noteName: any;
   noteContent: string = "";
-
   showMarkdown = false;
+  fontSize: number = 20;
+
+  @HostListener("window:keydown",['$event'])
+  handleKeyboardInputs(event: KeyboardEvent) {
+    const key = event.key.toLowerCase();
+    if (event.ctrlKey && key === '+') {
+      this.increaseFontSize();
+      event.preventDefault();
+    }else if (event.ctrlKey && key === '-') {
+      this.decreaseFontSize();
+      event.preventDefault();
+    }
+  }
+
+  increaseFontSize() {
+    if (this.fontSize < 50) {
+      this.fontSize += 5;
+      const textArea = document.getElementById("editor") as HTMLTextAreaElement;
+      if (textArea) {
+        textArea.style.fontSize = `${this.fontSize}px`;
+      }
+    }
+  }
+
+  decreaseFontSize() {
+    if (this.fontSize > 10) {
+      this.fontSize -= 5;
+      const textArea = document.getElementById("editor") as HTMLTextAreaElement;
+      if (textArea) {
+        textArea.style.fontSize = `${this.fontSize}px`;
+      }
+    }
+  }
 
   constructor(private noteService: NoteService,
               private fileService: FileService,
@@ -38,6 +71,9 @@ export class EditorViewComponent implements OnChanges {
 
              }
 
+    ngAfterViewInit() {
+     }
+
 
   ngOnChanges(changes: SimpleChanges) {
       this.note = [this.node];
@@ -45,6 +81,8 @@ export class EditorViewComponent implements OnChanges {
       this.readingFile();
 
       console.log("editor",this.note);
+
+
   }
 
   onPreview() {
