@@ -4,14 +4,22 @@ import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { FormsModule } from '@angular/forms';
 import { NoteFile } from '../models/note-file.model';
+import { provideMarkdown,MarkdownModule } from 'ngx-markdown';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-editor-view',
-  imports: [FormsModule],
+  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule],
+  providers: [provideMarkdown(),],
   standalone: true,
   templateUrl: './editor-view.component.html',
   styleUrl: './editor-view.component.css'
 })
+
+
+
 export class EditorViewComponent implements OnChanges {
 
   @Input() node: any;
@@ -20,13 +28,13 @@ export class EditorViewComponent implements OnChanges {
   note: any;
   noteName: any;
   noteContent: string = "";
-  renderedMarkdown: string = "";
 
+  showMarkdown = false;
 
   constructor(private noteService: NoteService,
               private fileService: FileService,
-             private route: ActivatedRoute) {
-
+              private route: ActivatedRoute,
+             ) {
 
              }
 
@@ -39,10 +47,14 @@ export class EditorViewComponent implements OnChanges {
       console.log("editor",this.note);
   }
 
+  onPreview() {
+    this.showMarkdown = !this.showMarkdown;
+  }
+
 
 
   async saveCurrentFile() {
-    let result = await this.fileService.saveFile(this.note.path,this.noteContent);
+    let result = await this.fileService.saveFile(this.note[0].path,this.noteContent);
     console.log("saved file",result);
     console.log(this.noteContent);
   }

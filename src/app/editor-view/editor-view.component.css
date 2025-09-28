@@ -7,6 +7,14 @@
   margin-left: 10px;
 }
 
+button{
+  background-color: var(--panel-dark);
+}
+button:hover{
+  background-color: var(--text-secondary-light);
+  cursor: pointer;
+}
+
 
 .editor-text{
   margin-left: 10px;
@@ -27,21 +35,31 @@ textarea{
 }
 
 textarea::-webkit-scrollbar {
-  width: 5px;              /* Breite der Scrollbar */
+  width: 5px;
   height: 10px;
 }
 
 textarea::-webkit-scrollbar-track {
-  background: var(--panel-dark);       /* Hintergrund der Spur */
+  background: transparent;
   border-radius: 10px;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background: #888;          /* Farbe des Scrollbalkens */
+  background: #888;
   border-radius: 10px;
 }
 
 textarea::-webkit-scrollbar-thumb:hover {
-  background: #555;          /* Hover-Effekt */
+  background: #555;
+  cursor: pointer;
 }
+
+.markdown-preview{
+  overflow-y: scroll;
+  max-height: 95vh;
+  width: 80vw;
+}
+
+
+
 
