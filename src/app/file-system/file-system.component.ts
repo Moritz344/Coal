@@ -3,14 +3,13 @@ import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { TreeNodeComponent} from '../tree-node/tree-node.component';
 import { EditorViewComponent } from '../editor-view/editor-view.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule,ActivatedRoute} from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FrontPageComponent } from '../front-page/front-page.component';
 import { SettingsComponent } from '../settings/settings.component';
-
 import { MatDialog} from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,15 +25,16 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
 @Component({
   selector: 'app-file-system',
   standalone: true,
-  imports: [RouterModule,TreeNodeComponent,CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
+  imports: [
+    RouterModule,
+    TreeNodeComponent,
+    CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
   ,MatDialogModule,MatButtonModule,DragDropModule,FrontPageComponent],
   templateUrl: './file-system.component.html',
   styleUrl: './file-system.component.css'
 })
 export class FileSystemComponent {
   @Input() node: any;
-  @Output() showFrontPageAction =  new EventEmitter<boolean>;
-  @Output() showHomepage=  new EventEmitter<boolean>;
 
   path = "";
   rawFiles: NoteFile[] = [];
@@ -43,6 +43,8 @@ export class FileSystemComponent {
   pathValue: string = "";
   toggleTree = signal(true);
   selectedNode: any;
+
+  hideFileSystem = false;
 
   hoverX = 0;
   hoverY = 0;
@@ -90,8 +92,6 @@ export class FileSystemComponent {
   }
 
   onHome() {
-    this.hideEditor = true;
-    this.showHomepage.emit(true);
   }
 
   stopResize = () => {
@@ -148,7 +148,7 @@ export class FileSystemComponent {
 
   onNodeSelected(node: any) {
     this.selectedNode = node;
-    this.showFrontPageAction.emit(false);
+    this.hideFileSystem = false;
   }
 
   toggleFileTree(event: KeyboardEvent) {
@@ -163,7 +163,7 @@ export class FileSystemComponent {
     this.toggleTree.update((v) => !v);
   }
 
-  constructor(private noteService: NoteService,private fileService: FileService,private dialog: MatDialog) {
+  constructor(public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog) {
 
 
       this.noteService.currentPath$.subscribe(path => {

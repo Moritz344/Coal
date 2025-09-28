@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-editor-view',
-  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule],
+  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,],
   providers: [provideMarkdown(),],
   standalone: true,
   templateUrl: './editor-view.component.html',

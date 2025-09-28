@@ -30,13 +30,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onShowFrontPage(action: boolean) {
-    this.showFrontPage = action;
-  }
 
-  onHomepageAction(action: boolean) {
-    this.showFrontPage = action;
-  }
+
 
   ngOnInit() {
     this.fileService.getDefaultPath().then(defaultPath => {

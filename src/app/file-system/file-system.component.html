@@ -1,12 +1,13 @@
 
-  <div class="container" >
+  <div class="container" *ngIf="!hideFileSystem" >
   <app-sidebar
+  *ngIf="!hideFileSystem"
   [toggleTree]="toggleTree"
   (toggleResult)="onSideBarAction($event)"
   ></app-sidebar>
-  <div class="file-container" *ngIf="toggleTree()"  [class.active]="toggleTree()" #resizable >
+  <div class="file-container" *ngIf="toggleTree() && !hideFileSystem"  [class.active]="toggleTree()" #resizable >
 
-    <button [routerLink]="['/home',]" (click)="onHome()">
+    <button  (click)="onHome()">
       <img src="home.svg">
     </button>
 
@@ -23,7 +24,7 @@
       <img src="settings.svg" width="20" height="20">
     </button>
 
-    <div class="file-list" cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
+    <div class="file-list" *ngIf="!hideFileSystem"cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
          (click)="hideHoverCard($event)">
         <div class="file-box" *ngFor="let node of tree" (contextmenu)="showContextCard($event, node)" >
           <div class="file-placeholder" *cdkDragPlaceholder></div>

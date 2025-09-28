@@ -7,7 +7,7 @@ import { NoteFile } from '../models/note-file.model';
 @Component({
   selector: 'app-note-block',
   standalone: true,
-  imports: [RouterModule,EditorViewComponent],
+  imports: [RouterModule,EditorViewComponent,],
   templateUrl: './note-block.component.html',
   styleUrl: './note-block.component.css'
 })

@@ -10,6 +10,9 @@ import { NoteBlockComponent } from '../note-block/note-block.component';
   templateUrl: './front-page.component.html',
   styleUrl: './front-page.component.css'
 })
+
+// TODO: hide front-page
+
 export class FrontPageComponent implements OnInit {
 
   tree: any;
