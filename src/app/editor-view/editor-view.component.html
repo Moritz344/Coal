@@ -1,29 +1,31 @@
-<div class="topbar" (click)="onPreview()">
-  <button>
-  <img src="preview.svg">
-  </button>
-</div>
+<div class="topbar" >
+    <button (click)="onPreview()">
+    <img src="preview.svg">
+    </button>
+  </div>
+
 
 <div class="editor-container" *ngIf="!showMarkdown" >
-  <h1>{{ noteName }}</h1>
+    <h1>{{ noteName }}</h1>
 
-
-  <div  class="textbox">
+  <div class="textbox">
     @if (toggleWidth) {
       <textarea
-        id="editor"
-        (change)="saveCurrentFile()"
-        [(ngModel)]="noteContent"
-        class="editor-text">
-      </textarea>
+         id="editor"
+         (ngModelChange)="saveCurrentFile($event)"
+         [ngModel]="noteContent"
+         class="editor-text"
+         >
+       ></textarea>
 
       }@else{
-      <textarea
-        id="editor"
-        (change)="saveCurrentFile()"
-        [(ngModel)]="noteContent"
-        class="editor-text-zen">
-      </textarea>
+ <textarea
+    id="editor"
+    (ngModelChange)="saveCurrentFile($event)"
+    [ngModel]="noteContent"
+    class="editor-text"
+    >
+  ></textarea>
 
       }
 
@@ -32,9 +34,9 @@
 
 </div>
 
+
+
 <div *ngIf="showMarkdown" class="markdown-preview">
     <markdown id="editor" [data]="noteContent" >
     </markdown>
 </div>
-
-

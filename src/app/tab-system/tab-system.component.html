@@ -1,0 +1,12 @@
+
+<div class="container">
+  <div class="layout">
+    @for (t of tabs; track $index) {
+      <app-tab
+        [name]="t.name"
+        [node]="tabs"
+        >
+      </app-tab>
+    }
+  </div>
+</div>

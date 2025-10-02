@@ -1,5 +1,5 @@
 {
-  "name": "emerald",
+  "name": "caol",
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
@@ -24,8 +24,10 @@
     "fs": "^0.0.1-security",
     "marked": "^16.2.1",
     "ngx-editor": "^19.0.0-beta.1",
+    "ngx-markdown": "^20.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "vim.js": "^0.1.2",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

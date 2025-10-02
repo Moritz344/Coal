@@ -1,11 +1,26 @@
 
 .editor-container{
   height: 500px;
+  position: absolute;
+  left: 400px;
+  top: 0px;
 }
+
+.topbar{
+  position: absolute;
+  right: 50px;
+  top: 10px;
+
+  z-index: 1;
+}
+
 
 .editor-container h1{
   margin-left: 10px;
 }
+
+
+
 
 button{
   background-color: var(--panel-dark);
@@ -22,7 +37,6 @@ button:hover{
   width: 1400px;
 
 }
-
 .editor-text-zen{
   width: 1800px;
   height: 850px;
@@ -58,6 +72,10 @@ textarea::-webkit-scrollbar-thumb:hover {
   overflow-y: scroll;
   max-height: 95vh;
   width: 80vw;
+  height: 500px;
+  position: absolute;
+  left: 400px;
+  top: 0px;
 }
 
 

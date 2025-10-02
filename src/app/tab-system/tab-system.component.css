@@ -1,0 +1,12 @@
+
+.container{
+  position: absolute;
+  left: 900px;
+  margin-bottom: 100px;
+  width: 60%;
+}
+
+.layout{
+  display: grid;
+  grid-template-columns: repeat(4,220px);
+}

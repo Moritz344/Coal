@@ -52,7 +52,7 @@ li{
   background-color: var(--panel-dark);
   overflow: hidden;
   line-height:3em;
-  max-width: 500px;
+  max-width: 300px;
 
 
 }
@@ -61,11 +61,6 @@ li{
 
 .file-container * {
   user-select: none;
-}
-
-app-editor-view {
-  position:relative;
-  padding: 10px;
 }
 
 

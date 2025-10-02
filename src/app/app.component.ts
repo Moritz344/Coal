@@ -5,12 +5,13 @@ import { FileSystemComponent } from './file-system/file-system.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FileService } from './services/file.service';
 import { NoteService } from './services/note.service';
+import { TabSystemComponent } from './tab-system/tab-system.component';
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,FrontPageComponent,FileSystemComponent,SidebarComponent],
+  imports: [RouterOutlet,FrontPageComponent,FileSystemComponent,SidebarComponent,TabSystemComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

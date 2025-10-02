@@ -40,15 +40,6 @@
 
     <div class="resizer" (mousedown)="initResize($event)"></div>
   </div>
-    @if (this.selectedNode && hideEditor !== true) {
-      <app-editor-view
-      [node]="selectedNode"
-      [toggleWidth]="toggleTree"
-      (click)="hideHoverCard($event)"
-      >
-      </app-editor-view>
-    }
-
 
   </div>
 

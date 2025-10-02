@@ -3,7 +3,7 @@ import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { TreeNodeComponent} from '../tree-node/tree-node.component';
 import { EditorViewComponent } from '../editor-view/editor-view.component';
-import { RouterModule,ActivatedRoute} from '@angular/router';
+import { RouterModule,ActivatedRoute,Router} from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
@@ -15,6 +15,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop';
+import { EditorService } from '../services/editor.service';
+import { TabService } from '../services/tab.service';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
@@ -53,7 +55,6 @@ export class FileSystemComponent {
 
   countFileName = 0;
 
-  hideEditor= false;
 
   private startX = 0;
   private startWidth = 0;
@@ -104,7 +105,6 @@ export class FileSystemComponent {
       this.showContextMenu = true;
       this.selectedNode = node;
       this.contextAction = null;
-      console.log("selected",this.selectedNode);
   }
 
   hideHoverCard(event: MouseEvent) {
@@ -115,7 +115,6 @@ export class FileSystemComponent {
   onContextAction(action: any) {
     this.contextAction = action;
     this.showContextMenu = false;
-    console.log("on context action ",this.contextAction);
 
     if (this.contextAction && this.contextAction[0].type === "delete") {
       this.deleteFileOnContextAction();
@@ -127,7 +126,6 @@ export class FileSystemComponent {
   }
 
   deleteFileOnContextAction() {
-      console.log("node to delete",this.contextAction[0].data.path);
 
       for (let i=0;i<this.tree.length;i++) {
         if (this.tree[i].path === this.contextAction[0].data.path) {
@@ -137,7 +135,6 @@ export class FileSystemComponent {
 
       }
 
-      console.log(this.tree);
 
   }
 
@@ -149,6 +146,22 @@ export class FileSystemComponent {
   onNodeSelected(node: any) {
     this.selectedNode = node;
     this.hideFileSystem = false;
+
+    this.editorService.addFile(this.selectedNode);
+    this.router.navigate(['/editor']);
+
+    this.tabService.getTabArray().subscribe(result => {
+        const flattenedResult = result.flat();
+        const exists = flattenedResult.some((element: any) => element.name === this.selectedNode.name);
+
+
+        if (!exists) {
+          this.tabService.addTab(this.selectedNode);
+        }
+
+
+
+      });
   }
 
   toggleFileTree(event: KeyboardEvent) {
@@ -163,14 +176,13 @@ export class FileSystemComponent {
     this.toggleTree.update((v) => !v);
   }
 
-  constructor(public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog) {
+  constructor(public tabService: TabService,public router: Router,public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog,public editorService: EditorService) {
 
 
       this.noteService.currentPath$.subscribe(path => {
         if (!path) return;
         this.path = path;
         this.loadTree(this.path);
-        console.log("PFAD aktualisiert:", this.path);
       });
 
 
@@ -195,9 +207,7 @@ export class FileSystemComponent {
   async loadTree(path: string) {
     this.rawFiles = await this.fileService.readDir(path);
     if (this.rawFiles.length >= 1) {
-      //console.log(this.rawFiles);
       this.tree = await this.buildTreeService(path);
-      console.log(this.tree);
     }
 
   }

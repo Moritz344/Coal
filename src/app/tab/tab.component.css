@@ -1,0 +1,28 @@
+.container{
+  background-color: var(--panel-dark);
+  width: 200px;
+  max-width: 200px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.items{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+
+.items span{
+  width: 130px;
+  max-width: 130px;
+}
+
+.close{
+background: transparent;
+}
+
+
+
