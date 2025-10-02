@@ -5,6 +5,8 @@
       <app-tab
         [name]="t.name"
         [node]="tabs"
+        [isSelected]="t.name === selectedTabName"
+        (selectedTab)="onTabSelect(t.name)"
         >
       </app-tab>
     }

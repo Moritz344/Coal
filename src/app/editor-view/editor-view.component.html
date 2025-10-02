@@ -1,3 +1,4 @@
+
 <div class="topbar" >
     <button (click)="onPreview()">
     <img src="preview.svg">
@@ -5,9 +6,10 @@
   </div>
 
 
+
 <div class="editor-container" *ngIf="!showMarkdown" >
     <h1>{{ noteName }}</h1>
-
+    <span class="path">{{ note.path }}</span>
   <div class="textbox">
     @if (toggleWidth) {
       <textarea

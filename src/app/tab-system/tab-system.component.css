@@ -1,12 +1,13 @@
 
 .container{
   position: absolute;
-  left: 900px;
+  left: 390px;
   margin-bottom: 100px;
-  width: 60%;
+  width: 79%;
+  border: 1px solid rgba(128, 128, 128, 0.3);
 }
 
 .layout{
   display: grid;
-  grid-template-columns: repeat(4,220px);
+  grid-template-columns: repeat(8,200px);
 }

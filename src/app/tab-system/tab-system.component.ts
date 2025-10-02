@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TabSystemComponent implements OnInit {
 
+  selectedTabName = "";
+
   tabs: any = [];
   test: any;
   selectedNode: any;
@@ -27,5 +29,9 @@ export class TabSystemComponent implements OnInit {
     });
   }
 
+  onTabSelect(name: string) {
+    this.selectedTabName = name;
+    console.log("tab name?",this.selectedTabName);
+  }
 
 }

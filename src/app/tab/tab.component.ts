@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,Output,EventEmitter,OnInit } from '@angular/core';
 import { TabService } from '../services/tab.service';
 import { EditorViewComponent } from '../editor-view/editor-view.component';
 import { EditorService } from '../services/editor.service';
@@ -11,12 +11,16 @@ import { Router } from '@angular/router';
   templateUrl: './tab.component.html',
   styleUrl: './tab.component.css'
 })
-export class TabComponent {
+export class TabComponent implements OnInit{
   @Input() name: string = "";
   @Input() node: any;
 
+  @Input() isSelected: boolean = false;
+  @Output() selectedTab = new EventEmitter<string>();
+
   selectedNode:any;
   toggleTree: boolean = false;
+  countSelected: number = 0;
 
 
   constructor(private tabService: TabService,
@@ -29,8 +33,15 @@ export class TabComponent {
     console.log("remove tab");
   }
 
+  ngOnInit() {
+     if (this.name.length >= 15) {
+       this.name = this.name.slice(0,15) + "...";
+     }
+  }
+
 
   onTabOpen() {
+    this.selectedTab.emit(this.name);
     const flattenedResult = this.node.flat();
     for (let i=0;i<flattenedResult.length;i++) {
       if (flattenedResult[i].name === this.name) {
@@ -39,6 +50,8 @@ export class TabComponent {
         this.router.navigate(['editor']);
       }
     }
+
+    console.log(this.isSelected);
 
   }
 

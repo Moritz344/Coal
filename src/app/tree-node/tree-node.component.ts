@@ -1,4 +1,4 @@
-import { Component,OnChanges,Input,EventEmitter,Output,SimpleChanges } from '@angular/core';
+import { Component,OnChanges,Input,EventEmitter,Output,SimpleChanges,OnInit } from '@angular/core';
 import { RouterModule,Router } from '@angular/router';
 import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -56,7 +56,10 @@ export class TreeNodeComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.action?.[0].type === "rename" ) {
       this.renameNode = this.action;
-      console.log("rename node",this.renameNode);
+    }
+
+    if (this.node.name.length >= 15) {
+      this.node.name = this.node.name.slice(0,15) + "...";
     }
   }
 
