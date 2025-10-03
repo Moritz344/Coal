@@ -3,6 +3,8 @@ import { TabService } from '../services/tab.service';
 import { EditorViewComponent } from '../editor-view/editor-view.component';
 import { EditorService } from '../services/editor.service';
 import { Router } from '@angular/router';
+//
+// TODO: if you close the tab that you are in close the file
 
 @Component({
   selector: 'app-tab',

@@ -32,6 +32,7 @@
             [node]="node"
             [action]="contextAction"
             (nodeSelected)="onNodeSelected($event)"
+            [isSelected]="selectedNodeName == node.name "
             cdkDrag>
           </app-tree-node>
         </div>

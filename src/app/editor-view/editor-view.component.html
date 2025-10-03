@@ -39,6 +39,9 @@
 
 
 <div *ngIf="showMarkdown" class="markdown-preview">
-    <markdown id="editor" [data]="noteContent" >
-    </markdown>
+    <h1 >{{ noteName }}</h1>
+    <span class="markdown-path" >{{ note.path }}</span>
+    <markdown id="editor" [data]="noteContent" ></markdown>
 </div>
+
+

@@ -18,11 +18,13 @@ export class TreeNodeComponent implements OnChanges {
   @Input() node: any = null;
   @Input() action: any = null;
   @Output() nodeSelected = new EventEmitter<any>();
+  @Input() isSelected: boolean = false;
 
   note: any;
   noteContent: any;
   noteDir: any;
   rawFiles: any = [];
+
 
   onlyFiles: string[] = [];
   path: string = "";
@@ -82,7 +84,7 @@ export class TreeNodeComponent implements OnChanges {
   }
 
   updateNotePath(path: string) {
-    console.log(this.node);
+    //console.log(this.node);
     this.node.path = path;
 
   }
@@ -95,16 +97,16 @@ export class TreeNodeComponent implements OnChanges {
 
     this.fileService.renameFile(oldPath,finalPath);
     this.updateNotePath(finalPath);
-    console.log("Neuer dateiname",name,"mit pfad",finalPath,"alter pfad",oldPath);
+    //console.log("Neuer dateiname",name,"mit pfad",finalPath,"alter pfad",oldPath);
 
 
   }
 
   saveCurrentSelectedNote(name: any,path: string) {
-    console.log("current",name,path);
     if (!this.node.isDirectory) {
       this.noteService.currentSelectedNote = [{name: name,path: path,content: "", isDirectory: false}];
       this.nodeSelected.emit(this.node);
+      this.isSelected = true;
     }
       console.log(this.noteService.currentSelectedNote);
 

@@ -3,7 +3,9 @@
   gap: 10px;
   margin-top: 10px;
   background-color: transparent;
-  transition: 0.3s ease;
+  padding: 5px;
+  border-radius: 10px;
+  color: var(--text-secondary-light);
 
 }
 
@@ -34,11 +36,16 @@ details[open] .arrow-wrapper {
   margin-left: 10px;
 }
 
-
-.tree-node:hover{
+.selected{
   padding: 5px;
   border-radius: 10px;
+  background-color: var(--bg-dark);
   color: white;
+}
+
+.tree-node:hover{
+  color: white;
+  background-color: var(--bg-dark);
 }
 
 .tree-node a:hover{

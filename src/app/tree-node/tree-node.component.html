@@ -1,6 +1,6 @@
 
 
-    <div class="tree-node" (click)="saveCurrentSelectedNote(node.name,node.path) ">
+    <div class="tree-node" [class.selected]="isSelected === true" (click)="saveCurrentSelectedNote(node.name,node.path) ">
       <ng-container *ngIf="node.isDirectory ; else fileTemplate">
 
 

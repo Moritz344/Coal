@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop';
 import { EditorService } from '../services/editor.service';
 import { TabService } from '../services/tab.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
@@ -37,6 +38,8 @@ import { TabService } from '../services/tab.service';
 })
 export class FileSystemComponent {
   @Input() node: any;
+  @Output() newWidthScale = new EventEmitter<number>;
+  @Output() maxWidthScale = new EventEmitter<boolean>();
 
   path = "";
   rawFiles: NoteFile[] = [];
@@ -45,6 +48,7 @@ export class FileSystemComponent {
   pathValue: string = "";
   toggleTree = signal(true);
   selectedNode: any;
+  selectedNodeName: string = "";
 
   hideFileSystem = false;
 
@@ -82,7 +86,10 @@ export class FileSystemComponent {
 
   onMouseMove = (event: MouseEvent) => {
     const newWidth = this.startWidth + (event.clientX - this.startX);
-    this.resizable.nativeElement.style.width = newWidth + 'px';
+    if (newWidth <= 300 && newWidth >= 100) {
+      this.resizable.nativeElement.style.width = newWidth + 'px';
+      this.newWidthScale.emit(newWidth);
+    }
   }
 
   onSettings() {
@@ -123,6 +130,9 @@ export class FileSystemComponent {
 
   onSideBarAction(toggle: boolean) {
     this.toggleTree.update((toggle) => !toggle);
+    this.maxWidthScale.emit(this.toggleTree());
+    this.cdr.detectChanges();
+    console.log(toggle);
   }
 
   deleteFileOnContextAction() {
@@ -146,6 +156,7 @@ export class FileSystemComponent {
   onNodeSelected(node: any) {
     this.selectedNode = node;
     this.hideFileSystem = false;
+    this.selectedNodeName = this.selectedNode.name;
 
     this.editorService.addFile(this.selectedNode);
     this.router.navigate(['/editor']);
@@ -176,7 +187,7 @@ export class FileSystemComponent {
     this.toggleTree.update((v) => !v);
   }
 
-  constructor(public tabService: TabService,public router: Router,public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog,public editorService: EditorService) {
+  constructor(public tabService: TabService,public router: Router,public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog,public editorService: EditorService,private cdr: ChangeDetectorRef) {
 
 
       this.noteService.currentPath$.subscribe(path => {

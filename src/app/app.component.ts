@@ -7,6 +7,7 @@ import { FileService } from './services/file.service';
 import { NoteService } from './services/note.service';
 import { TabSystemComponent } from './tab-system/tab-system.component';
 
+// TODO: make it responsive
 
 
 @Component({
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   title = 'emerald';
   selectedTree: any;
   showFrontPage = true;
+  fileSystemWidth = 300;
+  fileSystemMaxWidth = true;
 
 
 
@@ -41,4 +44,13 @@ export class AppComponent implements OnInit {
 
     });
   }
+
+  onNewWidth(width: number) {
+    this.fileSystemWidth = width;
+  }
+
+  onMaxWidth(isMax: boolean) {
+    this.fileSystemMaxWidth = isMax;
+  }
+
 }

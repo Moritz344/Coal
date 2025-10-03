@@ -15,14 +15,11 @@ export class TabService {
   addTab(note: any) {
     this.tabArray.push(note);
     this.tabArraySubject.next(this.tabArray);
-    console.log("added ",note);
   }
 
   removeTabElement(name: string) {
     const index = this.tabArray.indexOf(name);
     this.tabArray.splice(index,1);
-    console.log("remove tab",index,this.tabArray);
-    console.log(name);
   }
 
 

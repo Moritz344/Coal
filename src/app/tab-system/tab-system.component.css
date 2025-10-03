@@ -3,9 +3,11 @@
   position: absolute;
   left: 390px;
   margin-bottom: 100px;
-  width: 79%;
+  width: 100%;
   border: 1px solid rgba(128, 128, 128, 0.3);
+  height: 50px;
 }
+
 
 .layout{
   display: grid;

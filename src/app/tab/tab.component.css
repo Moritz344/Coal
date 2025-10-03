@@ -2,6 +2,8 @@
   width: 200px;
   max-width: 200px;
   margin-top: 0px;
+  margin-left: 0px;
+  height: 50px;
 }
 
 .container:hover{
@@ -25,6 +27,10 @@
 .items span{
   width: 130px;
   max-width: 130px;
+}
+
+.items span:hover{
+  cursor: pointer;
 }
 
 .close{

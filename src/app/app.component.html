@@ -1,7 +1,12 @@
 
-<app-tab-system></app-tab-system>
+<app-tab-system
+    [fileSystemWidth]="fileSystemWidth"
+    [fileSystemMaxWidth]="fileSystemMaxWidth"
+  ></app-tab-system>
 
 <app-file-system
+    (newWidthScale)="onNewWidth($event)"
+    (maxWidthScale)="onMaxWidth($event)"
  ></app-file-system>
 
 <router-outlet></router-outlet>

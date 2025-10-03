@@ -41,7 +41,7 @@
 body {
   background-color: var(--bg-dark);
   color: var(--text-primary-dark);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -92,7 +92,6 @@ details:hover{
 }
 
 a {
-  color: var(--text-secondary-light);
   text-decoration: none;
   border-radius: 10px;
 }

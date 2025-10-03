@@ -7,10 +7,12 @@
 
 
 .container button{
-
   transition: 0.3s ease;
   background: transparent;
-  margin-top: 15px;
+  margin-top: 50px;
+}
+
+button{
 }
 
 .container button.rotated {
