@@ -7,8 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 export class TabService {
 
   tabArray: any = [];
-
   private tabArraySubject = new BehaviorSubject<any>(this.tabArray);
+
+  currentFileTreeWidth: number = 0;
+  currentFileTreeWidthSubject = new BehaviorSubject<number>(this.currentFileTreeWidth);
+
+  currentFileTreeState: boolean = true;
+  currentFileTreeStateSubject= new BehaviorSubject<boolean>(this.currentFileTreeState);
 
   constructor() { }
 
@@ -17,9 +22,31 @@ export class TabService {
     this.tabArraySubject.next(this.tabArray);
   }
 
+  saveCurrentFileTreeWidth(width: number) {
+    this.currentFileTreeWidth = width;
+    this.currentFileTreeWidthSubject.next(this.currentFileTreeWidth);
+  }
+
+  getCurrentFileTreeWidth() {
+    return this.currentFileTreeWidthSubject.asObservable();
+  }
+
+  saveCurrentFileTreeState(state: boolean) {
+    this.currentFileTreeState = state;
+    this.currentFileTreeStateSubject.next(this.currentFileTreeState);
+  }
+
+  getCurrentFileTreeState() {
+    return this.currentFileTreeStateSubject.asObservable();
+  }
+
   removeTabElement(name: string) {
-    const index = this.tabArray.indexOf(name);
-    this.tabArray.splice(index,1);
+    for (let i=0;i<this.tabArray.length;i++) {
+      if (this.tabArray[i].name === name) {
+        const index = i;
+        this.tabArray.splice(index,1);
+      }
+    }
   }
 
 

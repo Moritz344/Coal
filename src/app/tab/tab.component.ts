@@ -1,4 +1,4 @@
-import { Component,Input,Output,EventEmitter,OnInit } from '@angular/core';
+import { Component,Input,Output,EventEmitter,OnInit,ViewChild,ElementRef } from '@angular/core';
 import { TabService } from '../services/tab.service';
 import { EditorViewComponent } from '../editor-view/editor-view.component';
 import { EditorService } from '../services/editor.service';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './tab.component.css'
 })
 export class TabComponent implements OnInit{
+  @ViewChild('tab') tab!: ElementRef;
   @Input() name: string = "";
   @Input() node: any;
 
@@ -32,7 +33,7 @@ export class TabComponent implements OnInit{
 
   onTabClose() {
     this.tabService.removeTabElement(this.name);
-    console.log("remove tab");
+    console.log("remove this tab:",this.name);
   }
 
   ngOnInit() {
@@ -41,6 +42,18 @@ export class TabComponent implements OnInit{
      }
   }
 
+
+
+  updateTabPosition() {
+    this.tabService.getCurrentFileTreeWidth().subscribe( result => {
+      if (this.tab) {
+        if (result >= 300) {
+          this.tab.nativeElement.style.marginLeft = (result )  + 'px';
+        }
+      }
+    });
+
+    }
 
   onTabOpen() {
     this.selectedTab.emit(this.name);

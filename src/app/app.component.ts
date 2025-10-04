@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   title = 'emerald';
   selectedTree: any;
   showFrontPage = true;
-  fileSystemWidth = 300;
+  fileSystemWidth = 390;
   fileSystemMaxWidth = true;
 
 

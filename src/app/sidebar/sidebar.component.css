@@ -2,24 +2,22 @@
   background-color: var(--bg-dark);
   height: 100%;
   width: 50px;
-
+  border: 1px solid rgba(128, 128, 128, 0.3);
 }
 
 
 .container button{
   transition: 0.3s ease;
   background: transparent;
-  margin-top: 50px;
+  margin-top: 0px;
+  margin-left: -5px;
 }
 
-button{
-}
 
 .container button.rotated {
   transform: rotate(-180deg);
 }
 .container.toggle{
-
   background-color: var(--panel-dark);
 }
 

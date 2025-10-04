@@ -27,11 +27,11 @@ li{
 @keyframes popOut {
   from {
     opacity: 1;
-    transform: translateY(0px) scale(0);
+    transform: translateX(0px) scale(1) ;
   }
   to {
     opacity: 0;
-    transform: translateY(-20px) scale(0.9);
+    transform: translateX(-1000px) ;
   }
 }
 
@@ -108,7 +108,6 @@ li{
   transform: scale(1.02);
 }
 
-.file-container.active{
+.active{
   animation: popIn 0.2s ;
 }
-

@@ -89,6 +89,8 @@ export class FileSystemComponent {
     if (newWidth <= 300 && newWidth >= 100) {
       this.resizable.nativeElement.style.width = newWidth + 'px';
       this.newWidthScale.emit(newWidth);
+      this.editorService.saveCurrentFileTreeWidth(newWidth);
+      this.tabService.saveCurrentFileTreeWidth(newWidth);
     }
   }
 
@@ -98,6 +100,7 @@ export class FileSystemComponent {
       panelClass: 'container'
     });
   }
+
 
   onHome() {
   }
@@ -132,6 +135,7 @@ export class FileSystemComponent {
     this.toggleTree.update((toggle) => !toggle);
     this.maxWidthScale.emit(this.toggleTree());
     this.cdr.detectChanges();
+    this.tabService.saveCurrentFileTreeState(this.toggleTree());
     console.log(toggle);
   }
 
@@ -175,12 +179,6 @@ export class FileSystemComponent {
       });
   }
 
-  toggleFileTree(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === "n") {
-      this.toggleTree.update((v) => !v);
-
-    }
-  }
 
 
   toggleFileTreeButton() {

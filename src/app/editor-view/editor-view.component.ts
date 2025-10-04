@@ -26,6 +26,8 @@ import { EditorService } from '../services/editor.service';
 
 export class EditorViewComponent implements OnChanges{
 
+  @ViewChild('editor') editor!: ElementRef;
+  @ViewChild('editorText') editorText!: ElementRef;
 
   toggleWidth: boolean = false;
   note: any;
@@ -67,14 +69,39 @@ export class EditorViewComponent implements OnChanges{
     }
   }
 
+  updateEditorPos() {
+      this.editorService.getToggleElement().subscribe(result => {
+        if (this.editor) {
+          if (!result) {
+            const newPos = 50 + 'px';
+            this.editor.nativeElement.style.left = newPos;
+            this.editorText.nativeElement.style.width = 1800 + 'px';
+          }else{
+            const newPos = 400 + 'px';
+            this.editor.nativeElement.style.left = newPos;
+            this.editorText.nativeElement.style.width = 1400 + 'px';
+          }
+        }
+      });
+
+      this.editorService.getCurrentFileTreeWidth().subscribe(width => {
+        if (this.editor) {
+          if (width) {
+              const newPos = (width + 95)  + 'px';
+              this.editor.nativeElement.style.left = newPos;
+            }
+          }
+      });
+  }
+
   loadNote() {
+
+
       this.editorService.getFiles().subscribe( result => {
         this.note = result;
         this.noteName = this.note.name;
         this.readingFile();
 
-        console.log("editor",this.note);
-        console.log("ON EDITOR",this.noteName);
       });
 
   }
@@ -84,6 +111,7 @@ export class EditorViewComponent implements OnChanges{
               public editorService: EditorService
              ) {
                this.loadNote();
+               this.updateEditorPos();
 
              }
 
@@ -92,6 +120,7 @@ export class EditorViewComponent implements OnChanges{
 
 
   ngOnChanges(changes: SimpleChanges) {
+
     }
 
 

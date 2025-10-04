@@ -1,4 +1,4 @@
-<div class="container" [class.selected]="isSelected === true">
+<div #tab class="container" [class.selected]="isSelected === true">
   <div class="items" (click)="onTabOpen()" >
     <span>{{ name }}</span>
     <button class="close" (click)="onTabClose()"><img src="close.svg"></button>

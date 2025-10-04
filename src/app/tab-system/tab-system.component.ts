@@ -14,13 +14,15 @@ import { CommonModule } from '@angular/common';
 export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
 
   @ViewChild('container') container!: ElementRef;
-  @Input() fileSystemWidth: number = 300;
+  @Input() fileSystemWidth: number = 0;
   @Input() fileSystemMaxWidth: boolean = false;
 
   selectedTabName = "";
   tabs: any = [];
   test: any;
   selectedNode: any;
+
+  previous: any;
 
   constructor(private tabService: TabService) {}
 
@@ -36,22 +38,32 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
 
 
   ngOnChanges() {
-    this.updateTabWidth();
+    let width = this.updateTabWidth();
+    this.previous = width;
   }
 
   ngAfterViewInit() {}
 
   updateTabWidth() {
+    // open: container left = 390px
+    // closed: container left = 51px
     if (this.container) {
-      const newPos = this.fileSystemWidth + 'px';
+      const newPos = this.fileSystemWidth + 90 + 'px';
       this.container.nativeElement.style.left = newPos;
 
+
       if (!this.fileSystemMaxWidth ) {
-        this.container.nativeElement.style.left = 0 + 'px';
-      }else {
-        this.container.nativeElement.style.left = 390 + 'px';
+        this.container.nativeElement.style.left = 51 + 'px';
       }
+
+      if(this.fileSystemMaxWidth) {
+        if (newPos === "300px" || newPos === "390px") {
+          this.container.nativeElement.style.left = 390 + 'px';
+        }
+      }
+
     }
+
 
 
 

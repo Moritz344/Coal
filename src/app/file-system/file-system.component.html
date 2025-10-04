@@ -24,6 +24,7 @@
       <img src="settings.svg" width="20" height="20">
     </button>
 
+
     <div class="file-list" *ngIf="!hideFileSystem"cdkDropList [cdkDropListData]="tree" (cdkDropListDropped)="drop($event)"
          (click)="hideHoverCard($event)">
         <div class="file-box" *ngFor="let node of tree" (contextmenu)="showContextCard($event, node)" >

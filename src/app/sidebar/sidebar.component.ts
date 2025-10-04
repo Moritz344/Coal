@@ -1,4 +1,5 @@
 import { Component,Output, Input, EventEmitter } from '@angular/core';
+import { EditorService } from '../services/editor.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,11 +13,12 @@ export class SidebarComponent {
   @Input() toggleTree: any;
   @Output() toggleResult  = new EventEmitter<any>();
 
-  constructor() {}
+  constructor(private editorService: EditorService) {}
 
   onSwitch() {
     this.toggleTree = !this.toggleTree;
     this.toggleResult.emit(this.toggleTree);
+    this.editorService.toggleElements(this.toggleTree);
   }
 
 }
