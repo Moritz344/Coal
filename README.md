@@ -6,7 +6,7 @@ Currently working on this minmal note taking app.
 <span></span>
 
 > [!WARNING]
-> **This app is currently in development. It might be not usable sometimes**
+> **This app is currently in development and may occasionally be unstable or unusable.**
 
 
 
