@@ -7,6 +7,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
+    frame: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -20,6 +21,7 @@ function createWindow() {
   }else {
     win.loadFile(path.join(__dirname, 'dist/emerald/browser/index.html'));
   }
+
 
 }
 
