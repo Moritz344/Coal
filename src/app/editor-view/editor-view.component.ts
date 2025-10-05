@@ -8,7 +8,7 @@ import { provideMarkdown,MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EditorService } from '../services/editor.service';
-
+import { TabService } from '../services/tab.service';
 
 
 // TODO: change font/change font-size
@@ -35,6 +35,8 @@ export class EditorViewComponent implements OnChanges{
   noteContent: string = "";
   showMarkdown = false;
   fontSize: number = 20;
+  hideEditor: boolean = false;
+  fileToHide: string = "";
 
 
   @HostListener("window:keydown",['$event'])
@@ -94,9 +96,17 @@ export class EditorViewComponent implements OnChanges{
       });
   }
 
+  loadHideEditor() {
+    this.editorService.getHideEditorValue().subscribe((result: any) => {
+      this.hideEditor = result;
+    });
+
+
+
+
+  }
+
   loadNote() {
-
-
       this.editorService.getFiles().subscribe( result => {
         this.note = result;
         this.noteName = this.note.name;
@@ -108,8 +118,10 @@ export class EditorViewComponent implements OnChanges{
 
   constructor(
               private fileService: FileService,
-              public editorService: EditorService
+              public editorService: EditorService,
+              public tabService: TabService
              ) {
+               this.loadHideEditor();
                this.loadNote();
                this.updateEditorPos();
 
@@ -133,14 +145,14 @@ export class EditorViewComponent implements OnChanges{
   async saveCurrentFile(content: string) {
     let result = await this.fileService.saveFile(this.note.path,content);
     this.noteContent = content;
-    console.log("saved",result);
+    //console.log("saved",result);
   }
 
 
   async readingFile() {
     if (!this.note.isDirectory ) {
       this.noteContent = await this.fileService.readFile(this.note.path);
-      console.log("content",this.noteContent);
+      //console.log("content",this.noteContent);
     }
 
 

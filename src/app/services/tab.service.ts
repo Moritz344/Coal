@@ -17,8 +17,9 @@ export class TabService {
 
   constructor() { }
 
-  addTab(note: any) {
-    this.tabArray.push(note);
+  addTab(note: any,) {
+    const tabWithState = { ...note,hideEditor: false };
+    this.tabArray.push(tabWithState);
     this.tabArraySubject.next(this.tabArray);
   }
 

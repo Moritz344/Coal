@@ -85,7 +85,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
+              "node_modules/@toast-ui/editor/dist/toastui-editor.css",
               "src/styles.css"
             ],
             "scripts": []

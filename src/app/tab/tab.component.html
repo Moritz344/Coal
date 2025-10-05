@@ -1,7 +1,14 @@
+
 <div #tab class="container" [class.selected]="isSelected === true">
   <div class="items" (click)="onTabOpen()" >
-    <span>{{ name }}</span>
+    <span>{{ displayName }}</span>
     <button class="close" (click)="onTabClose()"><img src="close.svg"></button>
+
+    <button
+      class="add"
+      *ngIf="isLast === true "
+      (click)="onTabAdd()"
+      ><img src="add.svg"></button>
   </div>
 </div>
 

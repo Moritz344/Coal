@@ -162,6 +162,7 @@ export class FileSystemComponent {
     this.hideFileSystem = false;
     this.selectedNodeName = this.selectedNode.name;
 
+    this.editorService.setHideEditor(false,);
     this.editorService.addFile(this.selectedNode);
     this.router.navigate(['/editor']);
 

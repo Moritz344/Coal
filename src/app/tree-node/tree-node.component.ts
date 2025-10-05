@@ -32,6 +32,7 @@ export class TreeNodeComponent implements OnChanges {
 
   renameNode:any;
   nodeToDelete: any;
+  displayName: string = "";
 
 
   async loadFiles() {
@@ -56,12 +57,13 @@ export class TreeNodeComponent implements OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges) {
+    this.displayName = this.node.name;
     if (this.action?.[0].type === "rename" ) {
       this.renameNode = this.action;
     }
 
-    if (this.node.name.length >= 15) {
-      this.node.name = this.node.name.slice(0,15) + "...";
+    if (this.displayName.length >= 15) {
+      this.displayName = this.displayName.slice(0,15) + "...";
     }
   }
 

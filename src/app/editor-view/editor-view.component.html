@@ -1,13 +1,7 @@
 
-<div class="topbar" >
-    <button (click)="onPreview()">
-    <img src="preview.svg">
-    </button>
-  </div>
 
 
-
-<div #editor class="editor-container" *ngIf="!showMarkdown" >
+<div #editor class="editor-container" *ngIf="!showMarkdown && !hideEditor" >
     <h1>{{ noteName }}</h1>
     <span class="path">{{ note.path }}</span>
   <div class="textbox">

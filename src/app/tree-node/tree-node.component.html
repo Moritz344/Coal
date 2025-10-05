@@ -23,7 +23,7 @@
             <img class="arrow" src="arrow.svg" width="20">
            </span>
            <img class="folder-icon" src="folder.svg">
-           {{ node.name }}
+           {{ displayName }}
           </summary>
 
           @for(child of node.children; track $index) {
@@ -55,7 +55,7 @@
             <img src="file.svg">
            }
             <a class="file" (dblclick)="startEditing()" (click)="saveCurrentSelectedNote(node.name,node.path)">
-            {{ node.name }}
+            {{ displayName }}
           </a>
           }
         </ng-template>

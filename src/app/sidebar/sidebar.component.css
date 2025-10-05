@@ -14,9 +14,6 @@
 }
 
 
-.container button.rotated {
-  transform: rotate(-180deg);
-}
 .container.toggle{
   background-color: var(--panel-dark);
 }

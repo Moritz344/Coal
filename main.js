@@ -54,7 +54,7 @@ ipcMain.handle('fs:readDir', async (event, dirPath) => {
       isImage: !item.isDirectory() && checkIfItemIsImage(item)
     }));
   } catch (err) {
-    console.error(err);
+    console.error("hier bitte",err);
     return [];
   }
 });

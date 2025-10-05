@@ -14,13 +14,14 @@ import { CommonModule } from '@angular/common';
 export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
 
   @ViewChild('container') container!: ElementRef;
-  @Input() fileSystemWidth: number = 0;
+  @Input() fileSystemWidth: number = 390;
   @Input() fileSystemMaxWidth: boolean = false;
 
   selectedTabName = "";
   tabs: any = [];
   test: any;
   selectedNode: any;
+  last = true;
 
   previous: any;
 
@@ -57,7 +58,7 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
       }
 
       if(this.fileSystemMaxWidth) {
-        if (newPos === "300px" || newPos === "390px") {
+        if (newPos === "300px" ) {
           this.container.nativeElement.style.left = 390 + 'px';
         }
       }

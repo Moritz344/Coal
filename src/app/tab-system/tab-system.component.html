@@ -1,14 +1,14 @@
 
 <div class="container" #container>
   <div class="layout">
-    @for (t of tabs; track $index) {
       <app-tab
+        *ngFor="let t of tabs; let last = last"
         [name]="t.name"
         [node]="tabs"
+        [isLast]="last"
         [isSelected]="t.name === selectedTabName"
         (selectedTab)="onTabSelect(t.name)"
         >
       </app-tab>
-    }
   </div>
 </div>

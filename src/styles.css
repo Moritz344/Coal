@@ -46,6 +46,15 @@ body {
   padding: 0;
 }
 
+/* Stile für das gesamte Dokument */
+html, body {
+    overflow: hidden; /* Deaktiviert Scrollen */
+}
+
+/* Optional: für spezifische Container */
+.your-container-class {
+    overflow: hidden; /* Entfernt Scrollbars */
+}
 
 
 

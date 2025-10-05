@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,12 @@ export class EditorService {
   fileTreeWidth: number = 0;
   fileTreeWidthSubject = new BehaviorSubject<number>(this.fileTreeWidth);
 
+  hideEditor: boolean = false;
+  hideEditorSubject = new BehaviorSubject<boolean>(this.hideEditor);
+
+  fileName: string = "";
+  fileNameSubject = new BehaviorSubject<string>(this.fileName);
+
   addFile(note: any) {
     this.selectedFile = note;
     this.fileToEdit.next(this.selectedFile);
@@ -23,6 +31,16 @@ export class EditorService {
   toggleElements(toggleWidth: boolean) {
     this.toggle = toggleWidth;
     this.toggleSubject.next(this.toggle);
+  }
+
+  setHideEditor(hide: boolean) {
+    this.hideEditor = hide;
+    this.hideEditorSubject.next(this.hideEditor);
+
+  }
+
+  getHideEditorValue() {
+    return this.hideEditorSubject.asObservable();
   }
 
   getToggleElement() {

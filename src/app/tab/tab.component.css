@@ -2,12 +2,13 @@
   width: 200px;
   max-width: 200px;
   margin-top: 0px;
-  height: 50px;
+  height: 30px;
 
 }
 
 .container:hover{
   background-color: var(--panel-dark);
+
 }
 
 .selected{
@@ -15,27 +16,43 @@
 }
 
 .items{
-  display: flex;
+  display: inline-flex;
   align-items: center;
   margin-left: 10px;
   position: relative;
   z-index: 1;
   overflow: hidden;
+  height: 30px;
 }
 
 
 .items span{
   width: 130px;
   max-width: 130px;
+  font-size: 15px;
 }
 
 .items span:hover{
   cursor: pointer;
 }
 
-.close{
+.close {
+  opacity: 0.5;
+}
+
+.close:hover{
+  opacity: 1;
   background: transparent;
 }
 
+.add{
+  display: flex;
+  justify-content: center;
+  width: 10px;
+  opacity: 0.5;
+}
 
-
+.add:hover{
+  opacity: 1;
+  background: transprent;
+}

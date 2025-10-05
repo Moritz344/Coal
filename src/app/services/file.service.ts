@@ -5,6 +5,9 @@ import { NoteFile } from '../models/note-file.model';
   providedIn: 'root'
 })
 export class FileService {
+
+  tree: NoteFile[] = [];
+
   async openFile(): Promise<{ filePath: string, content: string } | null> {
     const filePath = await (window as any).electronAPI.openFile();
     if (!filePath) return null;
@@ -47,13 +50,22 @@ export class FileService {
   async readDir(path: string) {
     return await (window as any).electronAPI.readDir(path);
   }
+
+  addFileToTree(note: any){
+    this.tree.push(note);
+  }
+
+  getTreeItems() {
+    return this.tree;
+  }
+
   async buildTree(path: string): Promise<NoteFile[]>{
     const files = await this.readDir(path);
-    const tree: NoteFile[] = [];
+    this.tree = [];
 
     for (const file of files) {
       if (file.isDirectory) {
-        tree.push({
+        this.tree.push({
           name: file.name,
           isDirectory: true,
           path: file.path,
@@ -61,7 +73,7 @@ export class FileService {
           isImage: false,
         });
       } else {
-        tree.push({
+        this.tree.push({
           name: file.name,
           path: file.path,
           isDirectory: false,
@@ -70,7 +82,7 @@ export class FileService {
       }
     }
 
-    return tree;
+    return this.tree;
 }
 
 
