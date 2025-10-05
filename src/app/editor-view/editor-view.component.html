@@ -1,18 +1,16 @@
 
-
-
 <div #editor class="editor-container" *ngIf="!showMarkdown && !hideEditor" >
     <h1>{{ noteName }}</h1>
     <span class="path">{{ note.path }}</span>
   <div class="textbox">
-      <textarea
-         #editorText
-         id="editor"
-         (ngModelChange)="saveCurrentFile($event)"
-         [ngModel]="noteContent"
-         class="editor-text"
-         >
-       ></textarea>
+  <ngx-editor
+        class="editor-text"
+        [editor]="textEditor"
+        [ngModel]="noteContent"
+        [disabled]="false"
+        (ngModelChange)="saveCurrentFile($event)"
+
+   ></ngx-editor>
 
 
   </div>

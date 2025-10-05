@@ -3,23 +3,24 @@ import { ActivatedRoute } from '@angular/router';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { FormsModule } from '@angular/forms';
-import { NoteFile } from '../models/note-file.model';
 import { provideMarkdown,MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EditorService } from '../services/editor.service';
 import { TabService } from '../services/tab.service';
+import { NgxEditorComponent,NgxEditorMenuComponent,Editor} from 'ngx-editor';
 
 
 // TODO: change font/change font-size
 
 @Component({
   selector: 'app-editor-view',
-  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,],
-  providers: [provideMarkdown(),],
-  standalone: true,
   templateUrl: './editor-view.component.html',
-  styleUrl: './editor-view.component.css'
+  styleUrl: './editor-view.component.css',
+  providers: [provideMarkdown(),],
+  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,
+  NgxEditorComponent,NgxEditorMenuComponent],
+  standalone: true,
 })
 
 
@@ -28,6 +29,9 @@ export class EditorViewComponent implements OnChanges{
 
   @ViewChild('editor') editor!: ElementRef;
   @ViewChild('editorText') editorText!: ElementRef;
+
+  textEditor = new Editor({
+  });
 
   toggleWidth: boolean = false;
   note: any;
