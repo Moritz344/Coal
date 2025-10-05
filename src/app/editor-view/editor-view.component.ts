@@ -8,8 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EditorService } from '../services/editor.service';
 import { TabService } from '../services/tab.service';
-import { NgxEditorComponent,NgxEditorMenuComponent,Editor} from 'ngx-editor';
-
+import { EditorModule } from 'primeng/editor';
 
 // TODO: change font/change font-size
 
@@ -18,20 +17,18 @@ import { NgxEditorComponent,NgxEditorMenuComponent,Editor} from 'ngx-editor';
   templateUrl: './editor-view.component.html',
   styleUrl: './editor-view.component.css',
   providers: [provideMarkdown(),],
-  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,
-  NgxEditorComponent,NgxEditorMenuComponent],
+  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,EditorModule],
   standalone: true,
 })
 
 
 
-export class EditorViewComponent implements OnChanges{
+export class EditorViewComponent implements OnChanges,OnDestroy{
 
   @ViewChild('editor') editor!: ElementRef;
-  @ViewChild('editorText') editorText!: ElementRef;
+  @ViewChild('editorText', { static: false }) editorText!: ElementRef;
 
-  textEditor = new Editor({
-  });
+
 
   toggleWidth: boolean = false;
   note: any;
@@ -65,6 +62,8 @@ export class EditorViewComponent implements OnChanges{
     }
   }
 
+
+
   decreaseFontSize() {
     if (this.fontSize > 10) {
       this.fontSize -= 5;
@@ -77,13 +76,13 @@ export class EditorViewComponent implements OnChanges{
 
   updateEditorPos() {
       this.editorService.getToggleElement().subscribe(result => {
-        if (this.editor) {
+        if (this.editor && this.editorText) {
           if (!result) {
             const newPos = 50 + 'px';
             this.editor.nativeElement.style.left = newPos;
             this.editorText.nativeElement.style.width = 1800 + 'px';
           }else{
-            const newPos = 400 + 'px';
+            const newPos = 350 + 'px';
             this.editor.nativeElement.style.left = newPos;
             this.editorText.nativeElement.style.width = 1400 + 'px';
           }
@@ -93,7 +92,7 @@ export class EditorViewComponent implements OnChanges{
       this.editorService.getCurrentFileTreeWidth().subscribe(width => {
         if (this.editor) {
           if (width) {
-              const newPos = (width + 95)  + 'px';
+              const newPos = (width + 50)  + 'px';
               this.editor.nativeElement.style.left = newPos;
             }
           }
@@ -138,6 +137,9 @@ export class EditorViewComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges) {
 
     }
+
+  ngOnDestroy() {
+  }
 
 
   onPreview() {

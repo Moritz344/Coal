@@ -1,12 +1,11 @@
 
 .container{
   position: absolute;
-  left: 390px;
+  left: 350px;
   margin-bottom: 100px;
   border: 1px solid rgba(128, 128, 128, 0.3);
   height: 30px;
   width: 100%;
-
 
 }
 

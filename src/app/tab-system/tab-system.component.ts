@@ -48,18 +48,19 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
   updateTabWidth() {
     // open: container left = 390px
     // closed: container left = 51px
+    // i dont know how many times i will comeback here i fucking hate this tabbar
     if (this.container) {
-      const newPos = this.fileSystemWidth + 90 + 'px';
+      const newPos = this.fileSystemWidth + 45 + 'px';
       this.container.nativeElement.style.left = newPos;
 
 
       if (!this.fileSystemMaxWidth ) {
-        this.container.nativeElement.style.left = 51 + 'px';
+        this.container.nativeElement.style.left = 49 + 'px';
       }
 
       if(this.fileSystemMaxWidth) {
         if (newPos === "300px" ) {
-          this.container.nativeElement.style.left = 390 + 'px';
+          this.container.nativeElement.style.left = 300 + 'px';
         }
       }
 

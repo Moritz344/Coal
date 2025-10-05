@@ -2,7 +2,7 @@
 .editor-container{
   height: 500px;
   position: absolute;
-  left: 400px;
+  left: 350px;
   top: 30px;
 }
 
@@ -23,15 +23,10 @@
 .path{
   opacity: 0.5;
   margin-top: 0px;
-  margin-left: 10px;
+  margin-left: 15px;
   transition: 0.3s ease;
 }
 
-.markdown-path{
-  opacity: 0.5;
-  margin-top: 0px;
-  transition: 0.3s ease;
-}
 
 .path:hover{
   opacity: 1;
@@ -39,11 +34,14 @@
 }
 
 .editor-container h1{
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 h1{
   margin-bottom: 0px;
+}
+
+p-editor{
 }
 
 
@@ -56,25 +54,16 @@ button:hover{
   cursor: pointer;
 }
 
-.NgxEditor__Content {
-  height: 1000px !important; /* Höhe des Editors */
-  background-color: #f5f5f5 !important; /* Hintergrundfarbe */
-  border: 1px solid #ccc !important; /* Randfarbe */
-  color: #333 !important; /* Textfarbe */
-}
 
-.NgxEditor__Content * {
-  color: inherit; /* Erbt die Textfarbe für alle inneren Elemente */
-}
 
 .textbox{
-  margin-left: 10px;
-  margin-top: 10px;
+  margin-left: 0px;
+  margin-top: 0px;
 }
+
 
 .editor-text{
   height: 850px;
-  width: 1400px;
 
 }
 .editor-text-zen{

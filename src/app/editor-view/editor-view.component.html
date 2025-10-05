@@ -2,15 +2,12 @@
 <div #editor class="editor-container" *ngIf="!showMarkdown && !hideEditor" >
     <h1>{{ noteName }}</h1>
     <span class="path">{{ note.path }}</span>
-  <div class="textbox">
-  <ngx-editor
-        class="editor-text"
-        [editor]="textEditor"
-        [ngModel]="noteContent"
-        [disabled]="false"
-        (ngModelChange)="saveCurrentFile($event)"
-
-   ></ngx-editor>
+  <div class="textbox" #editorText>
+    <p-editor
+    #editorText
+    [(ngModel)]="noteContent"
+    (ngModelChange)="saveCurrentFile($event)"
+    class="editor-text"  ></p-editor>
 
 
   </div>
@@ -19,11 +16,5 @@
 </div>
 
 
-
-<div *ngIf="showMarkdown" class="markdown-preview">
-    <h1 >{{ noteName }}</h1>
-    <span class="markdown-path" >{{ note.path }}</span>
-    <markdown id="editor" [data]="noteContent" ></markdown>
-</div>
 
 

@@ -33,6 +33,12 @@
   /* Borders / Divider */
   --border-dark: #2C2C2C;
   --border-light: #E0E0E0;
+
+  --p-editor-toolbar-background: var(--bg-dark);
+  --p-editor-toolbar-border-radius: 5px;
+  --p-editor-toolbar-item-color: white;
+  --p-editor-toolbar-item-hover-color: #007bff;
+  --p-editor-toolbar-item-active-color: #0056b3;
 }
 
 /* ==============================
