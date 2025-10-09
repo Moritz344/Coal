@@ -9,7 +9,7 @@ import { NoteFile } from '../models/note-file.model';
 import { ContextComponent } from '../context/context.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FrontPageComponent } from '../front-page/front-page.component';
-import { SettingsComponent } from '../settings/settings.component';
+import { SettingsComponent } from '../dialogs/settings/settings.component';
 import { MatDialog} from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,10 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
 import { EditorService } from '../services/editor.service';
 import { TabService } from '../services/tab.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+
 
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
@@ -32,9 +36,10 @@ import { ChangeDetectorRef } from '@angular/core';
     RouterModule,
     TreeNodeComponent,
     CommonModule,EditorViewComponent,ContextComponent,SidebarComponent,SettingsComponent
-  ,MatDialogModule,MatButtonModule,DragDropModule,FrontPageComponent],
+  ,MatDialogModule,MatButtonModule,DragDropModule,FrontPageComponent,ConfirmDialogModule],
   templateUrl: './file-system.component.html',
-  styleUrl: './file-system.component.css'
+  styleUrl: './file-system.component.css',
+  providers: [ ConfirmationService]
 })
 export class FileSystemComponent {
   @Input() node: any;
@@ -122,14 +127,30 @@ export class FileSystemComponent {
     this.contextAction = null;
   }
 
+  openConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '500px',
+      panelClass: 'container',
+    });
+
+    dialogRef.componentInstance.confirm.subscribe((result: boolean) => {
+      if (result) {
+        this.deleteFileOnContextAction();
+      }
+    });
+  }
+
   onContextAction(action: any) {
     this.contextAction = action;
     this.showContextMenu = false;
 
-    if (this.contextAction && this.contextAction[0].type === "delete") {
-      this.deleteFileOnContextAction();
+
+    if (this.contextAction && this.contextAction[0].type === "delete" ) {
+      this.openConfirmDialog();
     }
   }
+
+
 
   onSideBarAction(toggle: boolean) {
     this.toggleTree.update((toggle) => !toggle);
@@ -186,7 +207,8 @@ export class FileSystemComponent {
     this.toggleTree.update((v) => !v);
   }
 
-  constructor(public tabService: TabService,public router: Router,public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog,public editorService: EditorService,private cdr: ChangeDetectorRef) {
+  constructor(public tabService: TabService,public router: Router,public route: ActivatedRoute,private noteService: NoteService,private fileService: FileService,private dialog: MatDialog,public editorService: EditorService,private cdr: ChangeDetectorRef,
+             private confirmationService: ConfirmationService) {
 
 
       this.noteService.currentPath$.subscribe(path => {

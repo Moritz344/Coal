@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-context',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,],
   standalone: true,
   templateUrl: './context.component.html',
-  styleUrl: './context.component.css'
+  styleUrl: './context.component.css',
+  providers: []
 })
 export class ContextComponent implements OnChanges {
   @Input() file: any;
@@ -19,15 +20,16 @@ export class ContextComponent implements OnChanges {
 
   contextAction: any;
 
+  constructor() {}
+
   ngOnInit() {
-    console.log("context e",this.file);
     this.contextAction = [{type:"rename",data: this.file}];
 
   }
 
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['file'] && this.file) {
-      console.log("file in ngOnChanges:", this.file);
       this.contextAction = [{ type: "rename", data: this.file }];
     }
   }
@@ -40,6 +42,10 @@ export class ContextComponent implements OnChanges {
     this.contextAction = [{type: "delete",data: this.file }];
     this.fileEmit.emit(this.contextAction);
 
+  }
+  onClose() {
+    this.contextAction = [{type: "close",data: ""}];
+    this.fileEmit.emit(this.contextAction);
   }
 
 }

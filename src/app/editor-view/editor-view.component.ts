@@ -1,6 +1,4 @@
 import { Component,HostListener,OnChanges,ViewChild,ElementRef,Input,SimpleChanges,OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { FormsModule } from '@angular/forms';
 import { provideMarkdown,MarkdownModule } from 'ngx-markdown';
@@ -9,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditorService } from '../services/editor.service';
 import { TabService } from '../services/tab.service';
 import { EditorModule } from 'primeng/editor';
+import { MessageModule } from 'primeng/message';
 
 // TODO: change font/change font-size
 
@@ -17,7 +16,7 @@ import { EditorModule } from 'primeng/editor';
   templateUrl: './editor-view.component.html',
   styleUrl: './editor-view.component.css',
   providers: [provideMarkdown(),],
-  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,EditorModule],
+  imports: [FormsModule,HttpClientModule,CommonModule,MarkdownModule,EditorModule,MessageModule],
   standalone: true,
 })
 
@@ -34,10 +33,10 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
   note: any;
   noteName: any;
   noteContent: string = "";
-  showMarkdown = false;
   fontSize: number = 20;
   hideEditor: boolean = false;
   fileToHide: string = "";
+  savedFile: boolean = true;
 
 
   @HostListener("window:keydown",['$event'])
@@ -116,6 +115,7 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
         this.readingFile();
 
       });
+      this.savedFile = true;
 
   }
 
@@ -142,9 +142,6 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
   }
 
 
-  onPreview() {
-    this.showMarkdown = !this.showMarkdown;
-  }
 
 
 

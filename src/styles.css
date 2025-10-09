@@ -39,7 +39,21 @@
   --p-editor-toolbar-item-color: white;
   --p-editor-toolbar-item-hover-color: #007bff;
   --p-editor-toolbar-item-active-color: #0056b3;
+  --p-editor-overlay-option-color: white;
+  --p-editor-overlay-option-color: white;
+  --p-editor-overlay-option-hover-color: black;
+
+  --p-message-info-background: #007bff;
+  --p-message-info-border:#76c7a1;
+  --p-message-info-color: white;
+  --p-message-border-width: 2px;
+  --p-message-content-padding: 10px;
+  --p-message-info-border-color: white;
+
+
+
 }
+
 
 /* ==============================
    Dark Mode (Standard)
@@ -52,14 +66,8 @@ body {
   padding: 0;
 }
 
-/* Stile für das gesamte Dokument */
 html, body {
     overflow: hidden; /* Deaktiviert Scrollen */
-}
-
-/* Optional: für spezifische Container */
-.your-container-class {
-    overflow: hidden; /* Entfernt Scrollbars */
 }
 
 

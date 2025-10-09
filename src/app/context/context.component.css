@@ -6,7 +6,13 @@
   z-index: 1000;
   max-width: 500px;
   border-radius: 10px;
+  height: 150px;
 }
+
+::ng-deep .p-confirmdialog {
+    z-index: 10000; /* Hoch genug, um über anderen Elementen zu stehen */
+}
+
 
 span{
   font-size: 15px;
@@ -23,13 +29,31 @@ img {
   display:flex;
   width: 200px;
   justify-content: left;
+  margin-top: 0px;
 }
 .rename-container button {
   display:flex;
   width: 200px;
   justify-content: left;
+  margin-bottom: 0px;
 }
 
+.cancel-container button{
+  display:flex;
+  width: 200px;
+  justify-content: left;
+}
+
+.rename-container{
+  height: 40px;
+}
+
+.delete-container {
+  height: 40px;
+}
+.cancel-container{
+  height: 100px;
+}
 
 
 .rename-container img,

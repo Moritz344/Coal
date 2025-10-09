@@ -1,16 +1,19 @@
 
-<div #editor class="editor-container" *ngIf="!showMarkdown && !hideEditor" >
+<div #editor class="editor-container" *ngIf="!hideEditor" >
     <h1>{{ noteName }}</h1>
     <span class="path">{{ note.path }}</span>
+
+
   <div class="textbox" #editorText>
     <p-editor
     #editorText
     [(ngModel)]="noteContent"
     (ngModelChange)="saveCurrentFile($event)"
-    class="editor-text"  ></p-editor>
+    class="editor-text" ></p-editor>
 
 
   </div>
+
 
 
 </div>

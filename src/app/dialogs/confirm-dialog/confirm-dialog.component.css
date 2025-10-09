@@ -1,0 +1,23 @@
+.container{
+  background-color: var(--bg-dark);
+  border: 2px solid white;
+  padding: 10px;
+}
+
+.button-layout{
+  display: flex;
+  flex-direction: rows;
+  width: 200px;
+}
+.button-layout button{
+  font-size: 15px;
+}
+
+.yes{
+  margin-left: 0px;
+}
+
+button:hover{
+  background-color: var(--panel-dark);
+}
+
