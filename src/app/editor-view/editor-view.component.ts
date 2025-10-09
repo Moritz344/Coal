@@ -148,14 +148,15 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
   async saveCurrentFile(content: string) {
     let result = await this.fileService.saveFile(this.note.path,content);
     this.noteContent = content;
-    //console.log("saved",result);
+    console.log("saved",content);
   }
 
 
   async readingFile() {
     if (!this.note.isDirectory ) {
-      this.noteContent = await this.fileService.readFile(this.note.path);
-      //console.log("content",this.noteContent);
+      if (this.note.path) {
+        this.noteContent = await this.fileService.readFile(this.note.path);
+      }
     }
 
 

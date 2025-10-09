@@ -1,21 +1,39 @@
 .container{
+  display: flex;
   background-color: var(--bg-dark);
   border: 2px solid white;
   padding: 10px;
+  height: 150px;
+  align-items: center;
+}
+
+.container span{
+  margin-left: 60px;
+  font-size: 20px;
+}
+
+.close{
+  position: absolute;
+  top:2px;
+  right: 2px;
+}
+
+.container strong{
+  position: absolute;
+  top:0px;
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 .button-layout{
-  display: flex;
-  flex-direction: rows;
-  width: 200px;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
 }
 .button-layout button{
   font-size: 15px;
 }
 
-.yes{
-  margin-left: 0px;
-}
 
 button:hover{
   background-color: var(--panel-dark);

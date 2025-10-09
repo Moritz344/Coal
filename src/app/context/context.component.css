@@ -6,12 +6,10 @@
   z-index: 1000;
   max-width: 500px;
   border-radius: 10px;
-  height: 150px;
+  min-height: 150px;
 }
 
-::ng-deep .p-confirmdialog {
-    z-index: 10000; /* Hoch genug, um über anderen Elementen zu stehen */
-}
+
 
 
 span{

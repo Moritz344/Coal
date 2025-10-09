@@ -1,7 +1,14 @@
+
 <div class="container">
+  <strong>Confirmation</strong>
   <span>Are you sure you want to delete this File?</span>
   <div class="button-layout">
     <button (click)="onAccept()">Yes</button>
     <button (click)="onClose()">Cancel</button>
+  </div>
+  <div class="close">
+    <button (click)="onClose()">
+      <img src="close.svg">
+    </button>
   </div>
 </div>
