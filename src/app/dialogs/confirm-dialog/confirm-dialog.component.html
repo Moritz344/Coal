@@ -1,10 +1,10 @@
 
 <div class="container">
   <strong>Confirmation</strong>
-  <span>Are you sure you want to delete this File?</span>
+  <span>{{ data.message }}</span>
   <div class="button-layout">
-    <button (click)="onAccept()">Yes</button>
-    <button (click)="onClose()">Cancel</button>
+    <button (click)="onAccept()">{{ data.options[0] }}</button>
+    <button (click)="onClose()">{{ data.options[1] }}</button>
   </div>
   <div class="close">
     <button (click)="onClose()">

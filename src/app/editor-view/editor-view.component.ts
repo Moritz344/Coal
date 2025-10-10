@@ -81,7 +81,7 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
             this.editor.nativeElement.style.left = newPos;
             this.editorText.nativeElement.style.width = 1800 + 'px';
           }else{
-            const newPos = 350 + 'px';
+            const newPos = 400 + 'px';
             this.editor.nativeElement.style.left = newPos;
             this.editorText.nativeElement.style.width = 1400 + 'px';
           }
@@ -102,7 +102,6 @@ export class EditorViewComponent implements OnChanges,OnDestroy{
     this.editorService.getHideEditorValue().subscribe((result: any) => {
       this.hideEditor = result;
     });
-
 
 
 

@@ -50,10 +50,35 @@ li{
   min-width: 100px;
   padding: 20px;
   background-color: var(--panel-dark);
-  overflow: hidden;
+  overflow-Y: scroll;
   line-height:3em;
   max-width: 300px;
+  box-sizing: border-box;
+  height: 100%;
 
+}
+
+.no-file{
+  background-color: black;
+}
+
+.resizer {
+  position: absolute;
+  width: 5px;
+  background: transparent;
+  top: 0px;
+  left: 350px;
+  right: 0px;
+  bottom:0px;
+  cursor: ew-resize;
+  border-radius: 10px;
+  height: 100vh ;
+  z-index: 10;
+  visibility: true;
+}
+
+::-webkit-scrollbar {
+  display: none;
 
 }
 
@@ -64,16 +89,7 @@ li{
 }
 
 
-.resizer {
-  width: 5px;
-  height: 100%;
-  background: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: ew-resize;
-  border-radius: 10px;
-}
+
 .resizer:hover{
   background-color: white;
   cursor: ew-resize;

@@ -1,10 +1,8 @@
-
 <div #editor class="editor-container" *ngIf="!hideEditor" >
     <h1>{{ noteName }}</h1>
     <span class="path">{{ note.path }}</span>
 
-
-  <div class="textbox" #editorText>
+  <div class="textbox" #editorText >
     <p-editor
     #editorText
     [(ngModel)]="noteContent"
@@ -17,7 +15,6 @@
 
 
 </div>
-
 
 
 

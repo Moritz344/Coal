@@ -21,16 +21,16 @@ export class FrontPageComponent implements OnInit {
   constructor(private fileService: FileService, private noteService: NoteService) {}
 
   ngOnInit() {
-    setTimeout( () => {
-      this.path = this.noteService.getCurrentPath();
-    },50);
+    //setTimeout( () => {
+    //  this.path = this.noteService.getCurrentPath();
+    //},50);
 
-    setTimeout( () => {
-      this.fileService.buildTree(this.path).then( tree =>  {
-          this.tree = tree;
-          console.log(this.tree);
-      });
-    },100)
+    //setTimeout( () => {
+    //  this.fileService.buildTree(this.path).then( tree =>  {
+    //      this.tree = tree;
+    //      console.log(this.tree);
+    //  });
+    //},100)
 
   }
 

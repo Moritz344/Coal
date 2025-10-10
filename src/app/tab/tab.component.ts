@@ -47,6 +47,7 @@ export class TabComponent implements OnInit{
       this.tabService.getTabArray().subscribe(result  => {
        if (result.length === 0) {
          this.editorService.setHideEditor(true);
+         this.router.navigate(['/home']);
        }
      });
 

@@ -1,4 +1,4 @@
-import { Component,Input,HostListener,signal,ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
+import { Component,Input,HostListener,signal,ElementRef,ViewChild,Output,EventEmitter,AfterViewInit } from '@angular/core';
 import { NoteService } from '../services/note.service';
 import { FileService } from '../services/file.service';
 import { TreeNodeComponent} from '../tree-node/tree-node.component';
@@ -41,7 +41,7 @@ import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog
   styleUrl: './file-system.component.css',
   providers: [ ConfirmationService]
 })
-export class FileSystemComponent {
+export class FileSystemComponent implements AfterViewInit {
   @Input() node: any;
   @Output() newWidthScale = new EventEmitter<number>;
   @Output() maxWidthScale = new EventEmitter<boolean>();
@@ -62,14 +62,29 @@ export class FileSystemComponent {
   showContextMenu = false;
   contextAction: any;
 
-  countFileName = 0;
 
 
   private startX = 0;
   private startWidth = 0;
 
   @ViewChild('resizable') resizable!: ElementRef;
+  @ViewChild('resizer') resizer!: ElementRef;
   @HostListener('window:keydown', ['$event'])
+
+  ngAfterViewInit() {
+    if (this.resizer) {
+      this.resizerHeight();
+    }
+    this.router.navigate(["/home"])
+  }
+
+  resizerHeight() {
+      const height = this.resizable.nativeElement.clientHeight;
+      this.resizer.nativeElement.style.height = height + "px"
+
+
+
+  }
 
   drop(event: CdkDragDrop<any[]>) {
     if (!event.container?.data) {
@@ -96,6 +111,7 @@ export class FileSystemComponent {
       this.newWidthScale.emit(newWidth);
       this.editorService.saveCurrentFileTreeWidth(newWidth);
       this.tabService.saveCurrentFileTreeWidth(newWidth);
+      this.resizer.nativeElement.style.left = newWidth + 50 + 'px';
     }
   }
 
@@ -131,6 +147,11 @@ export class FileSystemComponent {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '500px',
       panelClass: 'container',
+      data: {
+        message: "Are you sure you want to delete this file?",
+        options: ["Yes","Cancel"],
+        function: "delete"
+      }
     });
 
     dialogRef.componentInstance.confirm.subscribe((result: boolean) => {
@@ -157,7 +178,12 @@ export class FileSystemComponent {
     this.maxWidthScale.emit(this.toggleTree());
     this.cdr.detectChanges();
     this.tabService.saveCurrentFileTreeState(this.toggleTree());
-    console.log(toggle);
+    if (toggle) {
+      this.resizer.nativeElement.style.visibility = "visible";
+    }else{
+      this.resizer.nativeElement.style.visibility = "hidden";
+
+    }
   }
 
   deleteFileOnContextAction() {
@@ -183,9 +209,11 @@ export class FileSystemComponent {
     this.hideFileSystem = false;
     this.selectedNodeName = this.selectedNode.name;
 
-    this.editorService.setHideEditor(false,);
+
+    this.editorService.setHideEditor(false);
     this.editorService.addFile(this.selectedNode);
     this.router.navigate(['/editor']);
+
 
     this.tabService.getTabArray().subscribe(result => {
         const flattenedResult = result.flat();
@@ -272,21 +300,28 @@ export class FileSystemComponent {
   }
 
   async createNote(name: string) {
-    let result = await this.fileService.saveFile(this.path + "/" + name,"");
-    this.countFileName += 1;
-    console.log(result);
     let exists = this.checkIfFileExists(name);
       if (!exists) {
+        let result = await this.fileService.saveFile(this.path + "/" + name,"");
         console.log("file does not exist");
           this.tree.push({
             name: name,
             path: this.path + "/" + name,
             isDirectory: false
           });
+      }else {
+        const randomNumber = Math.floor(Math.random() * 10);
+        const splitName = name.split(".");
+        console.log(splitName);
+        const fileName = splitName[0] + "_" + randomNumber + "." + splitName[1];
+        let result = await this.fileService.saveFile(this.path + "/" + fileName,"");
+          this.tree.push({
+            name: fileName,
+            path: this.path + "/" + fileName,
+            isDirectory: false
+          });
       }
 
-      console.log(name,this.path + "/" + name);
-      console.log(this.tree);
   }
 
 

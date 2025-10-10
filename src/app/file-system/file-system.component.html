@@ -5,6 +5,7 @@
   [toggleTree]="toggleTree"
   (toggleResult)="onSideBarAction($event)"
   ></app-sidebar>
+    <div #resizer class="resizer" (mousedown)="initResize($event)"></div>
   <div class="file-container" *ngIf="toggleTree() && !hideFileSystem"  [class.active]="toggleTree()" #resizable >
 
     <button  (click)="onHome()">
@@ -40,7 +41,6 @@
     </div>
 
 
-    <div class="resizer" (mousedown)="initResize($event)"></div>
   </div>
 
   </div>
@@ -55,5 +55,4 @@
       >
       </app-context>
     }
-
 
