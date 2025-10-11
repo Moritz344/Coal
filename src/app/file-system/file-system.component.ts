@@ -26,7 +26,8 @@ import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog
 // TODO: pfad selbst wählen
 // TODO: button mit dem man ordner hinzufügen kann oder datein
 // TODO: Nerdtree,vim status line
-// TODO: when trying to open a video file -> ignore it
+// TODO: when trying to open a video file or img -> ignore it
+// TODO: when creating files don't choose creative funny names
 
 
 @Component({
@@ -75,7 +76,7 @@ export class FileSystemComponent implements AfterViewInit {
     if (this.resizer) {
       this.resizerHeight();
     }
-    this.router.navigate(["/home"])
+    this.router.navigate(["/home"]);
   }
 
   resizerHeight() {
@@ -124,6 +125,7 @@ export class FileSystemComponent implements AfterViewInit {
 
 
   onHome() {
+    this.router.navigate(["/home"]);
   }
 
   stopResize = () => {
@@ -164,7 +166,6 @@ export class FileSystemComponent implements AfterViewInit {
   onContextAction(action: any) {
     this.contextAction = action;
     this.showContextMenu = false;
-
 
     if (this.contextAction && this.contextAction[0].type === "delete" ) {
       this.openConfirmDialog();
@@ -299,29 +300,31 @@ export class FileSystemComponent implements AfterViewInit {
     }
   }
 
-  async createNote(name: string) {
-    let exists = this.checkIfFileExists(name);
-      if (!exists) {
-        let result = await this.fileService.saveFile(this.path + "/" + name,"");
-        console.log("file does not exist");
-          this.tree.push({
-            name: name,
-            path: this.path + "/" + name,
-            isDirectory: false
-          });
-      }else {
-        const randomNumber = Math.floor(Math.random() * 10);
-        const splitName = name.split(".");
-        console.log(splitName);
-        const fileName = splitName[0] + "_" + randomNumber + "." + splitName[1];
-        let result = await this.fileService.saveFile(this.path + "/" + fileName,"");
-          this.tree.push({
-            name: fileName,
-            path: this.path + "/" + fileName,
-            isDirectory: false
-          });
-      }
+  async createNote() {
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '500px',
+      height: '200px',
+      panelClass: 'container',
+      data: {
+        message: "How do you want to name your file?",
+        options: ["Save","Cancel"],
+        function: "create_file"
+      }
+    });
+
+    dialogRef.componentInstance.createFileName.subscribe((name: string) => {
+        let exists = this.checkIfFileExists(name);
+        if (!exists) {
+          let result = this.fileService.saveFile(this.path + name,"");
+            this.tree.push({
+              name: name,
+              path: this.path + name,
+              isDirectory: false
+            });
+        }
+
+    });
   }
 
 

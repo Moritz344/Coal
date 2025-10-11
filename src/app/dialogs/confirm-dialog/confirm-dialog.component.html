@@ -1,9 +1,30 @@
 
-<div class="container">
+<div class="container" *ngIf="data.function !== 'create_file'">
   <strong>Confirmation</strong>
   <span>{{ data.message }}</span>
   <div class="button-layout">
     <button (click)="onAccept()">{{ data.options[0] }}</button>
+    <button (click)="onClose()">{{ data.options[1] }}</button>
+  </div>
+  <div class="close">
+    <button (click)="onClose()">
+      <img src="close.svg">
+    </button>
+  </div>
+</div>
+
+<div class="container-create" *ngIf="data.function === 'create_file'">
+  <strong>Create File</strong>
+  <div class="message-span">
+    <span>{{ data.message }}</span>
+  </div>
+
+  <div class="input-field">
+    <input [(ngModel)]="createFileString" (keydown.code.enter)="onFileCreate()" placeholder="Untitled.md">
+  </div>
+
+  <div class="button-layout-create">
+    <button (click)="onFileCreate()">{{ data.options[0] }}</button>
     <button (click)="onClose()">{{ data.options[1] }}</button>
   </div>
   <div class="close">

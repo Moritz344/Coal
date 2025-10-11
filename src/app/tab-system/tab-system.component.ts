@@ -22,7 +22,7 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
   test: any;
   selectedNode: any;
   last = true;
-
+  showTabSystem = true;
   previous: any;
 
   constructor(private tabService: TabService) {}
@@ -33,6 +33,8 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
       this.tabs = result;
     });
 
+
+
     this.updateTabWidth();
   }
 
@@ -41,6 +43,16 @@ export class TabSystemComponent implements OnInit,OnChanges,AfterViewInit {
   ngOnChanges() {
     let width = this.updateTabWidth();
     this.previous = width;
+
+    this.tabService.getTabArray().subscribe( result => {
+      if (result.length === 0) {
+        this.showTabSystem = false;
+      }else {
+        this.showTabSystem = true;
+      }
+    });
+
+
   }
 
   ngAfterViewInit() {}

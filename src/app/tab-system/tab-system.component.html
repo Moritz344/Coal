@@ -1,6 +1,6 @@
 
-<div class="container" #container>
-  <div class="layout">
+<div class="container"*ngIf="showTabSystem === true" #container>
+  <div class="layout" >
       <app-tab
         *ngFor="let t of tabs; let last = last"
         [name]="t.name"

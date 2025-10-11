@@ -62,6 +62,7 @@ export class TreeNodeComponent implements OnChanges {
       this.renameNode = this.action;
     }
 
+
     if (this.displayName.length >= 15) {
       this.displayName = this.displayName.slice(0,15) + "...";
     }
@@ -86,7 +87,6 @@ export class TreeNodeComponent implements OnChanges {
   }
 
   updateNotePath(path: string) {
-    //console.log(this.node);
     this.node.path = path;
 
   }
@@ -104,13 +104,13 @@ export class TreeNodeComponent implements OnChanges {
 
   }
 
+
   saveCurrentSelectedNote(name: any,path: string) {
     if (!this.node.isDirectory) {
       this.noteService.currentSelectedNote = [{name: name,path: path,content: "", isDirectory: false}];
       this.nodeSelected.emit(this.node);
       this.isSelected = true;
     }
-      console.log(this.noteService.currentSelectedNote);
 
       this.loadChildrenLazy();
   }
