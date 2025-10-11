@@ -1,7 +1,7 @@
 # Coal
 Currently working on this minmal note taking app.
 
-<img width="1520" height="973" alt="demo" src="https://github.com/user-attachments/assets/e80ff3dd-5992-456e-9eeb-86381b199b2b" />
+<img width="1603" height="939" alt="penguin" src="https://github.com/user-attachments/assets/3f517d3f-d06a-4b45-b9fa-0a5392fb79e4" />
 
 <span></span>
 
@@ -23,6 +23,7 @@ Currently working on this minmal note taking app.
 
 # Author
 - Moritz344
+
 
 
 
