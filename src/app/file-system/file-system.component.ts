@@ -76,7 +76,6 @@ export class FileSystemComponent implements AfterViewInit {
     if (this.resizer) {
       this.resizerHeight();
     }
-    this.router.navigate(["/home"]);
   }
 
   resizerHeight() {
@@ -125,7 +124,7 @@ export class FileSystemComponent implements AfterViewInit {
 
 
   onHome() {
-    this.router.navigate(["/home"]);
+    //this.router.navigate(["/home"]);
   }
 
   stopResize = () => {
